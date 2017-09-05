@@ -31,7 +31,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:58:15.838+05:30")
 public abstract class V1ApiService {
     public abstract Response analyze(String version,Parameters parameters,SecurityContext securityContext) throws NotFoundException;
     public abstract Response analyzeGet(String version,List<String> features,String text,String html,String url,Boolean returnAnalyzedText,Boolean clean,String xpath,Boolean fallbackToRaw,String language,Integer conceptsLimit,Boolean emotionDocument,List<String> emotionTargets,Integer entitiesLimit,String entitiesModel,Boolean entitiesEmotion,Boolean entitiesSentiment,Integer keywordsLimit,Boolean keywordsEmotion,Boolean keywordsSentiment,String relationsModel,Integer semanticRolesLimit,Boolean semanticRolesEntities,Boolean semanticRolesKeywords,Boolean sentimentDocument,List<String> sentimentTargets,SecurityContext securityContext) throws NotFoundException;

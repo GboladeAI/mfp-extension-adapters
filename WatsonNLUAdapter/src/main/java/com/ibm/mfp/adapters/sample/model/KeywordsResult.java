@@ -50,7 +50,7 @@ import javax.validation.constraints.*;
  * The most important keywords in the content, organized by relevance
  */
 @ApiModel(description = "The most important keywords in the content, organized by relevance")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:58:15.838+05:30")
 public class KeywordsResult   {
   @JsonProperty("relevance")
   private BigDecimal relevance = null;

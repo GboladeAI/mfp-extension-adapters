@@ -47,7 +47,7 @@ import javax.validation.constraints.*;
  * Whether or not to analyze content for general concepts that are referenced or alluded to
  */
 @ApiModel(description = "Whether or not to analyze content for general concepts that are referenced or alluded to")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:58:15.838+05:30")
 public class ConceptsOptions   {
   @JsonProperty("limit")
   private Integer limit = null;

@@ -50,7 +50,7 @@ import javax.validation.constraints.*;
  * The object containing the actions and the objects the actions act upon
  */
 @ApiModel(description = "The object containing the actions and the objects the actions act upon")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:58:15.838+05:30")
 public class SemanticRolesResult   {
   @JsonProperty("sentence")
   private String sentence = null;

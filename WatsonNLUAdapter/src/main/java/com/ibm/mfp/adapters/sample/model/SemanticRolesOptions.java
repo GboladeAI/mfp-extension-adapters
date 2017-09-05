@@ -47,7 +47,7 @@ import javax.validation.constraints.*;
  * An option specifying whether or not to identify the subjects, actions, and verbs in the analyzed content
  */
 @ApiModel(description = "An option specifying whether or not to identify the subjects, actions, and verbs in the analyzed content")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:58:15.838+05:30")
 public class SemanticRolesOptions   {
   @JsonProperty("limit")
   private Integer limit = null;

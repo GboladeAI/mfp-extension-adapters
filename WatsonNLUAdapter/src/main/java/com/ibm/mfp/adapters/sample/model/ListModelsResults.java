@@ -50,7 +50,7 @@ import javax.validation.constraints.*;
  * Models available for Relations and Entities features
  */
 @ApiModel(description = "Models available for Relations and Entities features")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:58:15.838+05:30")
 public class ListModelsResults   {
   @JsonProperty("models")
   private List<Model> models = null;

@@ -49,7 +49,7 @@ import javax.validation.constraints.*;
  * An option specifying if sentiment of detected entities, keywords, or phrases should be returned
  */
 @ApiModel(description = "An option specifying if sentiment of detected entities, keywords, or phrases should be returned")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:58:15.838+05:30")
 public class SentimentOptions   {
   @JsonProperty("document")
   private Boolean document = true;
