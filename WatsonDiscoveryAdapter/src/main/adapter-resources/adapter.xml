@@ -9,6 +9,12 @@
     <description>WatsonDiscovery</description>
 
     <JAXRSApplicationClass>com.ibm.mfp.adapters.sample.api.WatsonDiscoveryAdapterApplication</JAXRSApplicationClass>
-    <property name="username" displayName="Credentials: Username" defaultValue=""  />
-    <property name="password" displayName="Password" defaultValue=""  />
+    
+    
+    
+    
+        <property name="username" displayName="Credentials: Username" defaultValue=""  />
+        <property name="password" displayName="Password" defaultValue=""  />
+    
+
 </mfp:adapter>

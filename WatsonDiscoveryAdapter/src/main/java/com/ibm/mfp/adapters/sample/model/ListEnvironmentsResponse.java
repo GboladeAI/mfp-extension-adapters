@@ -49,7 +49,7 @@ import javax.validation.constraints.*;
 /**
  * ListEnvironmentsResponse
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:22:26.527+05:30")
 public class ListEnvironmentsResponse   {
   @JsonProperty("environments")
   private List<Environment> environments = null;

@@ -51,7 +51,7 @@ import javax.validation.constraints.*;
  * Document conversion settings
  */
 @ApiModel(description = "Document conversion settings")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:22:26.527+05:30")
 public class Conversions   {
   @JsonProperty("pdf")
   private PdfSettings pdf = null;

@@ -47,7 +47,7 @@ import javax.validation.constraints.*;
  * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are executed in the order that they appear in the array.
  */
 @ApiModel(description = "Defines operations that can be used to transform the final output JSON into a normalized form. Operations are executed in the order that they appear in the array.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:22:26.527+05:30")
 public class Normalizations extends ArrayList<NormalizationOperation>  {
 
   @Override

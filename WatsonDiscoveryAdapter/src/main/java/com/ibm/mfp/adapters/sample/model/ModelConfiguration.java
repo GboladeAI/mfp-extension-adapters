@@ -51,7 +51,7 @@ import javax.validation.constraints.*;
  * A custom configuration for the environment.
  */
 @ApiModel(description = "A custom configuration for the environment.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:22:26.527+05:30")
 public class ModelConfiguration   {
   @JsonProperty("configuration_id")
   private String configurationId = null;

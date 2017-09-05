@@ -49,7 +49,7 @@ import javax.validation.constraints.*;
  * Details about the disk and memory usage of this environment.
  */
 @ApiModel(description = "Details about the disk and memory usage of this environment.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:22:26.527+05:30")
 public class IndexCapacity   {
   @JsonProperty("disk_usage")
   private DiskUsage diskUsage = null;

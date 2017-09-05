@@ -48,7 +48,7 @@ import javax.validation.constraints.*;
 /**
  * QueryResult
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:22:26.527+05:30")
 public class QueryResult extends HashMap<String, Object>  {
   @JsonProperty("id")
   private String id = null;

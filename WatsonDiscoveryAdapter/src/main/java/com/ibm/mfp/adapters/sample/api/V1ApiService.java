@@ -48,7 +48,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:22:26.527+05:30")
 public abstract class V1ApiService {
     public abstract Response addDocument(String environmentId,String collectionId,String version,String configurationId,File file,String metadata,String _configuration,SecurityContext securityContext) throws NotFoundException;
     public abstract Response createCollection(String environmentId,String version,CreateCollectionRequest body,SecurityContext securityContext) throws NotFoundException;

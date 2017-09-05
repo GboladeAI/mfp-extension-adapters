@@ -50,7 +50,7 @@ import javax.validation.constraints.*;
  * The list of fetched fields.  The fields are returned using a fully-qualified name format, however, the format differs slightly from that used by the query operations. Specifically:      * fields which contain nested JSON objects are assigned a type of \&quot;nested\&quot;.      * fields which belong to a nested object are prefixed with &#x60;.properties&#x60; (e.g., &#x60;warnings.properties.severity&#x60; means that the &#x60;warnings&#x60; object has a property called &#x60;severity&#x60;).      * fields returned from the News collection are prefixed with &#x60;v[N]-fullnews-t3-[YEAR].mappings&#x60; (e.g., &#x60;v5-fullnews-t3-2016.mappings.text.properties.author&#x60;).
  */
 @ApiModel(description = "The list of fetched fields.  The fields are returned using a fully-qualified name format, however, the format differs slightly from that used by the query operations. Specifically:      * fields which contain nested JSON objects are assigned a type of \"nested\".      * fields which belong to a nested object are prefixed with `.properties` (e.g., `warnings.properties.severity` means that the `warnings` object has a property called `severity`).      * fields returned from the News collection are prefixed with `v[N]-fullnews-t3-[YEAR].mappings` (e.g., `v5-fullnews-t3-2016.mappings.text.properties.author`).")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:22:26.527+05:30")
 public class ListCollectionFieldsResponse   {
   @JsonProperty("fields")
   private List<Field> fields = null;

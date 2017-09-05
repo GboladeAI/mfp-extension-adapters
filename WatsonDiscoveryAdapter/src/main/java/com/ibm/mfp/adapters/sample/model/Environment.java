@@ -50,7 +50,7 @@ import javax.validation.constraints.*;
  * Details about an environment
  */
 @ApiModel(description = "Details about an environment")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:22:26.527+05:30")
 public class Environment   {
   @JsonProperty("environment_id")
   private String environmentId = null;

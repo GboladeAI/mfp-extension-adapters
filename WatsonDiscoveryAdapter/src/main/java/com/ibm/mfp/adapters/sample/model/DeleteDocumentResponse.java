@@ -46,7 +46,7 @@ import javax.validation.constraints.*;
 /**
  * DeleteDocumentResponse
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:22:26.527+05:30")
 public class DeleteDocumentResponse   {
   @JsonProperty("document_id")
   private String documentId = null;

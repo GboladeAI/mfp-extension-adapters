@@ -49,7 +49,7 @@ import javax.validation.constraints.*;
  * A notice produced by the ingestion process.
  */
 @ApiModel(description = "A notice produced by the ingestion process.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T17:22:26.527+05:30")
 public class Notice   {
   @JsonProperty("notice_id")
   private String noticeId = null;
