@@ -28,8 +28,14 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.ibm.mfp.adapters.sample.model.BaseWorkspace;
+import com.ibm.mfp.adapters.sample.model.CreateCounterexample;
+import com.ibm.mfp.adapters.sample.model.CreateEntity;
+import com.ibm.mfp.adapters.sample.model.CreateIntent;
+import com.ibm.mfp.adapters.sample.model.DialogNode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.constraints.*;
 
 /*
@@ -47,7 +53,7 @@ import javax.validation.constraints.*;
 /**
  * WorkspaceRequest
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class WorkspaceRequest   {
   @JsonProperty("name")
   private String name = null;
@@ -58,8 +64,23 @@ public class WorkspaceRequest   {
   @JsonProperty("language")
   private String language = null;
 
+  @JsonProperty("intents")
+  private List<CreateIntent> intents = null;
+
+  @JsonProperty("entities")
+  private List<CreateEntity> entities = null;
+
+  @JsonProperty("dialog_nodes")
+  private List<DialogNode> dialogNodes = null;
+
+  @JsonProperty("counterexamples")
+  private List<CreateCounterexample> counterexamples = null;
+
   @JsonProperty("metadata")
   private Object metadata = null;
+
+  @JsonProperty("learning_opt_out")
+  private Boolean learningOptOut = false;
 
   public WorkspaceRequest name(String name) {
     this.name = name;
@@ -118,6 +139,114 @@ public class WorkspaceRequest   {
     this.language = language;
   }
 
+  public WorkspaceRequest intents(List<CreateIntent> intents) {
+    this.intents = intents;
+    return this;
+  }
+
+  public WorkspaceRequest addIntentsItem(CreateIntent intentsItem) {
+    if (this.intents == null) {
+      this.intents = new ArrayList<CreateIntent>();
+    }
+    this.intents.add(intentsItem);
+    return this;
+  }
+
+   /**
+   * An array of objects defining the intents for the workspace.
+   * @return intents
+  **/
+  @JsonProperty("intents")
+  @ApiModelProperty(value = "An array of objects defining the intents for the workspace.")
+  public List<CreateIntent> getIntents() {
+    return intents;
+  }
+
+  public void setIntents(List<CreateIntent> intents) {
+    this.intents = intents;
+  }
+
+  public WorkspaceRequest entities(List<CreateEntity> entities) {
+    this.entities = entities;
+    return this;
+  }
+
+  public WorkspaceRequest addEntitiesItem(CreateEntity entitiesItem) {
+    if (this.entities == null) {
+      this.entities = new ArrayList<CreateEntity>();
+    }
+    this.entities.add(entitiesItem);
+    return this;
+  }
+
+   /**
+   * An array of objects defining the entities for the workspace.
+   * @return entities
+  **/
+  @JsonProperty("entities")
+  @ApiModelProperty(value = "An array of objects defining the entities for the workspace.")
+  public List<CreateEntity> getEntities() {
+    return entities;
+  }
+
+  public void setEntities(List<CreateEntity> entities) {
+    this.entities = entities;
+  }
+
+  public WorkspaceRequest dialogNodes(List<DialogNode> dialogNodes) {
+    this.dialogNodes = dialogNodes;
+    return this;
+  }
+
+  public WorkspaceRequest addDialogNodesItem(DialogNode dialogNodesItem) {
+    if (this.dialogNodes == null) {
+      this.dialogNodes = new ArrayList<DialogNode>();
+    }
+    this.dialogNodes.add(dialogNodesItem);
+    return this;
+  }
+
+   /**
+   * An array of objects defining the nodes in the workspace dialog.
+   * @return dialogNodes
+  **/
+  @JsonProperty("dialog_nodes")
+  @ApiModelProperty(value = "An array of objects defining the nodes in the workspace dialog.")
+  public List<DialogNode> getDialogNodes() {
+    return dialogNodes;
+  }
+
+  public void setDialogNodes(List<DialogNode> dialogNodes) {
+    this.dialogNodes = dialogNodes;
+  }
+
+  public WorkspaceRequest counterexamples(List<CreateCounterexample> counterexamples) {
+    this.counterexamples = counterexamples;
+    return this;
+  }
+
+  public WorkspaceRequest addCounterexamplesItem(CreateCounterexample counterexamplesItem) {
+    if (this.counterexamples == null) {
+      this.counterexamples = new ArrayList<CreateCounterexample>();
+    }
+    this.counterexamples.add(counterexamplesItem);
+    return this;
+  }
+
+   /**
+   * An array of objects defining input examples that have been marked as irrelevant input.
+   * @return counterexamples
+  **/
+  @JsonProperty("counterexamples")
+  @ApiModelProperty(value = "An array of objects defining input examples that have been marked as irrelevant input.")
+  public List<CreateCounterexample> getCounterexamples() {
+    return counterexamples;
+  }
+
+  public void setCounterexamples(List<CreateCounterexample> counterexamples) {
+    this.counterexamples = counterexamples;
+  }
+
   public WorkspaceRequest metadata(Object metadata) {
     this.metadata = metadata;
     return this;
@@ -137,6 +266,25 @@ public class WorkspaceRequest   {
     this.metadata = metadata;
   }
 
+  public WorkspaceRequest learningOptOut(Boolean learningOptOut) {
+    this.learningOptOut = learningOptOut;
+    return this;
+  }
+
+   /**
+   * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+   * @return learningOptOut
+  **/
+  @JsonProperty("learning_opt_out")
+  @ApiModelProperty(value = "Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.")
+  public Boolean getLearningOptOut() {
+    return learningOptOut;
+  }
+
+  public void setLearningOptOut(Boolean learningOptOut) {
+    this.learningOptOut = learningOptOut;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -150,12 +298,17 @@ public class WorkspaceRequest   {
     return Objects.equals(this.name, workspaceRequest.name) &&
         Objects.equals(this.description, workspaceRequest.description) &&
         Objects.equals(this.language, workspaceRequest.language) &&
-        Objects.equals(this.metadata, workspaceRequest.metadata);
+        Objects.equals(this.intents, workspaceRequest.intents) &&
+        Objects.equals(this.entities, workspaceRequest.entities) &&
+        Objects.equals(this.dialogNodes, workspaceRequest.dialogNodes) &&
+        Objects.equals(this.counterexamples, workspaceRequest.counterexamples) &&
+        Objects.equals(this.metadata, workspaceRequest.metadata) &&
+        Objects.equals(this.learningOptOut, workspaceRequest.learningOptOut);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, language, metadata);
+    return Objects.hash(name, description, language, intents, entities, dialogNodes, counterexamples, metadata, learningOptOut);
   }
 
 
@@ -167,7 +320,12 @@ public class WorkspaceRequest   {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    language: ").append(toIndentedString(language)).append("\n");
+    sb.append("    intents: ").append(toIndentedString(intents)).append("\n");
+    sb.append("    entities: ").append(toIndentedString(entities)).append("\n");
+    sb.append("    dialogNodes: ").append(toIndentedString(dialogNodes)).append("\n");
+    sb.append("    counterexamples: ").append(toIndentedString(counterexamples)).append("\n");
     sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
+    sb.append("    learningOptOut: ").append(toIndentedString(learningOptOut)).append("\n");
     sb.append("}");
     return sb.toString();
   }

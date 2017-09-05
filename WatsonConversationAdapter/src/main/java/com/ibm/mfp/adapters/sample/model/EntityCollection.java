@@ -27,7 +27,8 @@ package com.ibm.mfp.adapters.sample.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.ibm.mfp.adapters.sample.model.EntityExportResponse;
+import com.ibm.mfp.adapters.sample.model.EntityExport;
+import com.ibm.mfp.adapters.sample.model.Pagination;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
@@ -47,22 +48,23 @@ import javax.validation.constraints.*;
 
 
 /**
- * EntityCollection
+ * An array of entities.
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@ApiModel(description = "An array of entities.")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class EntityCollection   {
   @JsonProperty("entities")
-  private List<EntityExportResponse> entities = null;
+  private List<EntityExport> entities = new ArrayList<EntityExport>();
 
-  public EntityCollection entities(List<EntityExportResponse> entities) {
+  @JsonProperty("pagination")
+  private Pagination pagination = null;
+
+  public EntityCollection entities(List<EntityExport> entities) {
     this.entities = entities;
     return this;
   }
 
-  public EntityCollection addEntitiesItem(EntityExportResponse entitiesItem) {
-    if (this.entities == null) {
-      this.entities = new ArrayList<EntityExportResponse>();
-    }
+  public EntityCollection addEntitiesItem(EntityExport entitiesItem) {
     this.entities.add(entitiesItem);
     return this;
   }
@@ -72,13 +74,34 @@ public class EntityCollection   {
    * @return entities
   **/
   @JsonProperty("entities")
-  @ApiModelProperty(value = "An array of entities.")
-  public List<EntityExportResponse> getEntities() {
+  @ApiModelProperty(required = true, value = "An array of entities.")
+  @NotNull
+  public List<EntityExport> getEntities() {
     return entities;
   }
 
-  public void setEntities(List<EntityExportResponse> entities) {
+  public void setEntities(List<EntityExport> entities) {
     this.entities = entities;
+  }
+
+  public EntityCollection pagination(Pagination pagination) {
+    this.pagination = pagination;
+    return this;
+  }
+
+   /**
+   * An object defining the pagination data for the returned objects.
+   * @return pagination
+  **/
+  @JsonProperty("pagination")
+  @ApiModelProperty(required = true, value = "An object defining the pagination data for the returned objects.")
+  @NotNull
+  public Pagination getPagination() {
+    return pagination;
+  }
+
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
   }
 
 
@@ -91,12 +114,13 @@ public class EntityCollection   {
       return false;
     }
     EntityCollection entityCollection = (EntityCollection) o;
-    return Objects.equals(this.entities, entityCollection.entities);
+    return Objects.equals(this.entities, entityCollection.entities) &&
+        Objects.equals(this.pagination, entityCollection.pagination);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(entities);
+    return Objects.hash(entities, pagination);
   }
 
 
@@ -106,6 +130,7 @@ public class EntityCollection   {
     sb.append("class EntityCollection {\n");
     
     sb.append("    entities: ").append(toIndentedString(entities)).append("\n");
+    sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
     sb.append("}");
     return sb.toString();
   }

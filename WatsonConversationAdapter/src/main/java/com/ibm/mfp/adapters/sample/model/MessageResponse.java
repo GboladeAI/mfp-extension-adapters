@@ -28,11 +28,11 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.ibm.mfp.adapters.sample.model.BaseMessage;
+import com.ibm.mfp.adapters.sample.model.Context;
 import com.ibm.mfp.adapters.sample.model.MessageInput;
-import com.ibm.mfp.adapters.sample.model.RuntimeContext;
+import com.ibm.mfp.adapters.sample.model.OutputData;
 import com.ibm.mfp.adapters.sample.model.RuntimeEntity;
 import com.ibm.mfp.adapters.sample.model.RuntimeIntent;
-import com.ibm.mfp.adapters.sample.model.RuntimeOutput;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
@@ -55,25 +55,25 @@ import javax.validation.constraints.*;
  * A response from the Conversation service.
  */
 @ApiModel(description = "A response from the Conversation service.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class MessageResponse   {
   @JsonProperty("input")
   private MessageInput input = null;
 
   @JsonProperty("intents")
-  private List<RuntimeIntent> intents = null;
+  private List<RuntimeIntent> intents = new ArrayList<RuntimeIntent>();
 
   @JsonProperty("entities")
-  private List<RuntimeEntity> entities = null;
+  private List<RuntimeEntity> entities = new ArrayList<RuntimeEntity>();
 
   @JsonProperty("alternate_intents")
   private Boolean alternateIntents = false;
 
   @JsonProperty("context")
-  private RuntimeContext context = null;
+  private Context context = null;
 
   @JsonProperty("output")
-  private RuntimeOutput output = null;
+  private OutputData output = null;
 
   public MessageResponse input(MessageInput input) {
     this.input = input;
@@ -81,11 +81,11 @@ public class MessageResponse   {
   }
 
    /**
-   * Get input
+   * The user input from the request.
    * @return input
   **/
   @JsonProperty("input")
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "The user input from the request.")
   public MessageInput getInput() {
     return input;
   }
@@ -100,19 +100,17 @@ public class MessageResponse   {
   }
 
   public MessageResponse addIntentsItem(RuntimeIntent intentsItem) {
-    if (this.intents == null) {
-      this.intents = new ArrayList<RuntimeIntent>();
-    }
     this.intents.add(intentsItem);
     return this;
   }
 
    /**
-   * Get intents
+   * An array of intents recognized in the user input, sorted in descending order of confidence
    * @return intents
   **/
   @JsonProperty("intents")
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "An array of intents recognized in the user input, sorted in descending order of confidence")
+  @NotNull
   public List<RuntimeIntent> getIntents() {
     return intents;
   }
@@ -127,19 +125,17 @@ public class MessageResponse   {
   }
 
   public MessageResponse addEntitiesItem(RuntimeEntity entitiesItem) {
-    if (this.entities == null) {
-      this.entities = new ArrayList<RuntimeEntity>();
-    }
     this.entities.add(entitiesItem);
     return this;
   }
 
    /**
-   * Get entities
+   * An array of entities identified in the user input
    * @return entities
   **/
   @JsonProperty("entities")
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "An array of entities identified in the user input")
+  @NotNull
   public List<RuntimeEntity> getEntities() {
     return entities;
   }
@@ -167,41 +163,43 @@ public class MessageResponse   {
     this.alternateIntents = alternateIntents;
   }
 
-  public MessageResponse context(RuntimeContext context) {
+  public MessageResponse context(Context context) {
     this.context = context;
     return this;
   }
 
    /**
-   * Get context
+   * State information for the conversation
    * @return context
   **/
   @JsonProperty("context")
-  @ApiModelProperty(value = "")
-  public RuntimeContext getContext() {
+  @ApiModelProperty(required = true, value = "State information for the conversation")
+  @NotNull
+  public Context getContext() {
     return context;
   }
 
-  public void setContext(RuntimeContext context) {
+  public void setContext(Context context) {
     this.context = context;
   }
 
-  public MessageResponse output(RuntimeOutput output) {
+  public MessageResponse output(OutputData output) {
     this.output = output;
     return this;
   }
 
    /**
-   * Get output
+   * Output from the dialog, including the response to the user, the nodes that were triggered, and log messages
    * @return output
   **/
   @JsonProperty("output")
-  @ApiModelProperty(value = "")
-  public RuntimeOutput getOutput() {
+  @ApiModelProperty(required = true, value = "Output from the dialog, including the response to the user, the nodes that were triggered, and log messages")
+  @NotNull
+  public OutputData getOutput() {
     return output;
   }
 
-  public void setOutput(RuntimeOutput output) {
+  public void setOutput(OutputData output) {
     this.output = output;
   }
 

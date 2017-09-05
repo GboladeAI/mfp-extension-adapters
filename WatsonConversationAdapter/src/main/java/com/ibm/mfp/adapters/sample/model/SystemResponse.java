@@ -47,28 +47,28 @@ import javax.validation.constraints.*;
  * For internal use only.
  */
 @ApiModel(description = "For internal use only.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class SystemResponse   {
-  @JsonProperty("SystemResponse")
-  private Object systemResponse = null;
+  @JsonProperty("SystemResponseObject")
+  private Object systemResponseObject = null;
 
-  public SystemResponse systemResponse(Object systemResponse) {
-    this.systemResponse = systemResponse;
+  public SystemResponse systemResponseObject(Object systemResponseObject) {
+    this.systemResponseObject = systemResponseObject;
     return this;
   }
 
    /**
-   * Get systemResponse
-   * @return systemResponse
+   * Get systemResponseObject
+   * @return systemResponseObject
   **/
-  @JsonProperty("SystemResponse")
+  @JsonProperty("SystemResponseObject")
   @ApiModelProperty(value = "")
-  public Object getSystemResponse() {
-    return systemResponse;
+  public Object getSystemResponseObject() {
+    return systemResponseObject;
   }
 
-  public void setSystemResponse(Object systemResponse) {
-    this.systemResponse = systemResponse;
+  public void setSystemResponseObject(Object systemResponseObject) {
+    this.systemResponseObject = systemResponseObject;
   }
 
 
@@ -81,12 +81,12 @@ public class SystemResponse   {
       return false;
     }
     SystemResponse systemResponse = (SystemResponse) o;
-    return Objects.equals(this.systemResponse, systemResponse.systemResponse);
+    return Objects.equals(this.systemResponseObject, systemResponse.systemResponseObject);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(systemResponse);
+    return Objects.hash(systemResponseObject);
   }
 
 
@@ -95,7 +95,7 @@ public class SystemResponse   {
     StringBuilder sb = new StringBuilder();
     sb.append("class SystemResponse {\n");
     
-    sb.append("    systemResponse: ").append(toIndentedString(systemResponse)).append("\n");
+    sb.append("    systemResponseObject: ").append(toIndentedString(systemResponseObject)).append("\n");
     sb.append("}");
     return sb.toString();
   }

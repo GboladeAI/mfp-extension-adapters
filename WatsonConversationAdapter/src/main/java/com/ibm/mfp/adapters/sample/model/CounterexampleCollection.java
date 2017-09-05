@@ -27,7 +27,8 @@ package com.ibm.mfp.adapters.sample.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.ibm.mfp.adapters.sample.model.ExampleResponse;
+import com.ibm.mfp.adapters.sample.model.Counterexample;
+import com.ibm.mfp.adapters.sample.model.Pagination;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
@@ -49,36 +50,57 @@ import javax.validation.constraints.*;
 /**
  * CounterexampleCollection
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class CounterexampleCollection   {
   @JsonProperty("counterexamples")
-  private List<ExampleResponse> counterexamples = null;
+  private List<Counterexample> counterexamples = new ArrayList<Counterexample>();
 
-  public CounterexampleCollection counterexamples(List<ExampleResponse> counterexamples) {
+  @JsonProperty("pagination")
+  private Pagination pagination = null;
+
+  public CounterexampleCollection counterexamples(List<Counterexample> counterexamples) {
     this.counterexamples = counterexamples;
     return this;
   }
 
-  public CounterexampleCollection addCounterexamplesItem(ExampleResponse counterexamplesItem) {
-    if (this.counterexamples == null) {
-      this.counterexamples = new ArrayList<ExampleResponse>();
-    }
+  public CounterexampleCollection addCounterexamplesItem(Counterexample counterexamplesItem) {
     this.counterexamples.add(counterexamplesItem);
     return this;
   }
 
    /**
-   * An array of counterexamples.
+   * An array of objects describing the examples marked as irrelevant input.
    * @return counterexamples
   **/
   @JsonProperty("counterexamples")
-  @ApiModelProperty(value = "An array of counterexamples.")
-  public List<ExampleResponse> getCounterexamples() {
+  @ApiModelProperty(required = true, value = "An array of objects describing the examples marked as irrelevant input.")
+  @NotNull
+  public List<Counterexample> getCounterexamples() {
     return counterexamples;
   }
 
-  public void setCounterexamples(List<ExampleResponse> counterexamples) {
+  public void setCounterexamples(List<Counterexample> counterexamples) {
     this.counterexamples = counterexamples;
+  }
+
+  public CounterexampleCollection pagination(Pagination pagination) {
+    this.pagination = pagination;
+    return this;
+  }
+
+   /**
+   * An object defining the pagination data for the returned objects.
+   * @return pagination
+  **/
+  @JsonProperty("pagination")
+  @ApiModelProperty(required = true, value = "An object defining the pagination data for the returned objects.")
+  @NotNull
+  public Pagination getPagination() {
+    return pagination;
+  }
+
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
   }
 
 
@@ -91,12 +113,13 @@ public class CounterexampleCollection   {
       return false;
     }
     CounterexampleCollection counterexampleCollection = (CounterexampleCollection) o;
-    return Objects.equals(this.counterexamples, counterexampleCollection.counterexamples);
+    return Objects.equals(this.counterexamples, counterexampleCollection.counterexamples) &&
+        Objects.equals(this.pagination, counterexampleCollection.pagination);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(counterexamples);
+    return Objects.hash(counterexamples, pagination);
   }
 
 
@@ -106,6 +129,7 @@ public class CounterexampleCollection   {
     sb.append("class CounterexampleCollection {\n");
     
     sb.append("    counterexamples: ").append(toIndentedString(counterexamples)).append("\n");
+    sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
     sb.append("}");
     return sb.toString();
   }

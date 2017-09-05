@@ -27,11 +27,13 @@ package com.ibm.mfp.adapters.sample.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.ibm.mfp.adapters.sample.model.LogMessageResponse;
+import com.ibm.mfp.adapters.sample.model.LogMessage;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.validation.constraints.*;
 
 /*
@@ -50,10 +52,10 @@ import javax.validation.constraints.*;
  * An output object that includes the response to the user, the nodes that were hit, and messages from the log.
  */
 @ApiModel(description = "An output object that includes the response to the user, the nodes that were hit, and messages from the log.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
-public class OutputData   {
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
+public class OutputData extends HashMap<String, Object>  {
   @JsonProperty("log_messages")
-  private List<LogMessageResponse> logMessages = new ArrayList<LogMessageResponse>();
+  private List<LogMessage> logMessages = new ArrayList<LogMessage>();
 
   @JsonProperty("text")
   private List<String> text = new ArrayList<String>();
@@ -61,12 +63,12 @@ public class OutputData   {
   @JsonProperty("nodes_visited")
   private List<String> nodesVisited = null;
 
-  public OutputData logMessages(List<LogMessageResponse> logMessages) {
+  public OutputData logMessages(List<LogMessage> logMessages) {
     this.logMessages = logMessages;
     return this;
   }
 
-  public OutputData addLogMessagesItem(LogMessageResponse logMessagesItem) {
+  public OutputData addLogMessagesItem(LogMessage logMessagesItem) {
     this.logMessages.add(logMessagesItem);
     return this;
   }
@@ -78,11 +80,11 @@ public class OutputData   {
   @JsonProperty("log_messages")
   @ApiModelProperty(required = true, value = "Up to 50 messages logged with the request.")
   @NotNull
-  public List<LogMessageResponse> getLogMessages() {
+  public List<LogMessage> getLogMessages() {
     return logMessages;
   }
 
-  public void setLogMessages(List<LogMessageResponse> logMessages) {
+  public void setLogMessages(List<LogMessage> logMessages) {
     this.logMessages = logMessages;
   }
 
@@ -97,11 +99,11 @@ public class OutputData   {
   }
 
    /**
-   * Responses to the user.
+   * An array of responses to the user.
    * @return text
   **/
   @JsonProperty("text")
-  @ApiModelProperty(required = true, value = "Responses to the user.")
+  @ApiModelProperty(required = true, value = "An array of responses to the user.")
   @NotNull
   public List<String> getText() {
     return text;
@@ -125,11 +127,11 @@ public class OutputData   {
   }
 
    /**
-   * The nodes that were executed to create the response.
+   * An array of the nodes that were triggered to create the response.
    * @return nodesVisited
   **/
   @JsonProperty("nodes_visited")
-  @ApiModelProperty(value = "The nodes that were executed to create the response.")
+  @ApiModelProperty(value = "An array of the nodes that were triggered to create the response.")
   public List<String> getNodesVisited() {
     return nodesVisited;
   }
@@ -150,12 +152,13 @@ public class OutputData   {
     OutputData outputData = (OutputData) o;
     return Objects.equals(this.logMessages, outputData.logMessages) &&
         Objects.equals(this.text, outputData.text) &&
-        Objects.equals(this.nodesVisited, outputData.nodesVisited);
+        Objects.equals(this.nodesVisited, outputData.nodesVisited) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(logMessages, text, nodesVisited);
+    return Objects.hash(logMessages, text, nodesVisited, super.hashCode());
   }
 
 
@@ -163,7 +166,7 @@ public class OutputData   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class OutputData {\n");
-    
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    logMessages: ").append(toIndentedString(logMessages)).append("\n");
     sb.append("    text: ").append(toIndentedString(text)).append("\n");
     sb.append("    nodesVisited: ").append(toIndentedString(nodesVisited)).append("\n");

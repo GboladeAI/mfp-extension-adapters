@@ -4,27 +4,28 @@
   "info": {
     "version": "1.0",
     "title": "Conversation",
-    "description": "The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated dialog tools to create conversation flows between your apps and your users."
+    "description": "The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated dialog tools to create conversation flows between your apps and your users.",
+    "x-vcap-service-name": "conversation"
   },
-    "securityDefinitions":{
-    "basicAuth": {
-       "type": "basic",
-       "description": "HTTP Basic Authentication."
-     }
-    },
-    "security":[
-     {
-       "basicAuth": []
-     }
-    ],
-  "externalDocs": {
-    "description": "For more information about this service, see the documentation:",
-    "url": "http://www.ibm.com/watson/developercloud/doc/conversation"
-  },
-  "host": "gateway.watsonplatform.net",
-  "schemes": [
-    "https"
-  ],
+  "securityDefinitions":{
+"basicAuth": {
+   "type": "basic",
+   "description": "HTTP Basic Authentication."
+ }
+},
+"security":[
+ {
+   "basicAuth": []
+ }
+],
+"externalDocs": {
+"description": "For more information about this service, see the documentation:",
+"url": "http://www.ibm.com/watson/developercloud/doc/conversation"
+},
+"host": "gateway.watsonplatform.net",
+"schemes": [
+"https"
+],
   "tags": [
     {
       "name": "workspaces"
@@ -70,7 +71,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/CounterexampleCollectionResponse"
+              "$ref": "#/definitions/CounterexampleCollection"
             },
             "description": "Successful request.",
             "examples": {
@@ -120,16 +121,16 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "description": "A CreateExample object defining the content of the new user input example.",
+            "description": "An object defining the content of the new user input counterexample.",
             "schema": {
-              "$ref": "#/definitions/CreateExample"
+              "$ref": "#/definitions/CreateCounterexample"
             }
           }
         ],
         "responses": {
           "201": {
             "schema": {
-              "$ref": "#/definitions/ExampleResponse"
+              "$ref": "#/definitions/Counterexample"
             },
             "description": "Successful request."
           },
@@ -172,7 +173,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ExampleResponse"
+              "$ref": "#/definitions/Counterexample"
             },
             "description": "Successful request.",
             "examples": {
@@ -204,7 +205,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/EmptyObject"
+              "properties": {}
             },
             "description": "Successful request."
           },
@@ -234,16 +235,16 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "description": "An UpdateExample object defining the new text for the counterexample.",
+            "description": "An object defining the new text for the counterexample.",
             "schema": {
-              "$ref": "#/definitions/UpdateExample"
+              "$ref": "#/definitions/UpdateCounterexample"
             }
           }
         ],
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ExampleResponse"
+              "$ref": "#/definitions/Counterexample"
             },
             "description": "Successful request.",
             "examples": {
@@ -302,7 +303,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/EntityCollectionResponse"
+              "$ref": "#/definitions/EntityCollection"
             },
             "description": "Successful request.",
             "examples": {
@@ -362,7 +363,7 @@
         "responses": {
           "201": {
             "schema": {
-              "$ref": "#/definitions/EntityResponse"
+              "$ref": "#/definitions/Entity"
             },
             "description": "Successful request.",
             "examples": {
@@ -416,7 +417,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/EntityExportResponse"
+              "$ref": "#/definitions/EntityExport"
             },
             "description": "Successful request.",
             "examples": {
@@ -466,7 +467,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/EntityResponse"
+              "$ref": "#/definitions/Entity"
             },
             "description": "Successful request.",
             "examples": {
@@ -502,7 +503,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/EmptyObject"
+              "properties": {}
             },
             "description": "Successful request."
           },
@@ -557,7 +558,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ValueCollectionResponse"
+              "$ref": "#/definitions/ValueCollection"
             },
             "description": "Successful request.",
             "examples": {
@@ -616,7 +617,7 @@
         "responses": {
           "201": {
             "schema": {
-              "$ref": "#/definitions/ValueResponse"
+              "$ref": "#/definitions/Value"
             },
             "description": "Successful request."
           },
@@ -662,7 +663,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ValueExportResponse"
+              "$ref": "#/definitions/ValueExport"
             },
             "description": "Successful request.",
             "examples": {
@@ -691,6 +692,9 @@
         "tags": [
           "values"
         ],
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -708,7 +712,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ValueResponse"
+              "$ref": "#/definitions/Value"
             },
             "description": "Successful request.",
             "examples": {
@@ -742,7 +746,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/EmptyObject"
+              "properties": {}
             },
             "description": "Successful request."
           },
@@ -797,7 +801,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/SynonymCollectionResponse"
+              "$ref": "#/definitions/SynonymCollection"
             },
             "description": "Successful request.",
             "examples": {
@@ -858,7 +862,7 @@
         "responses": {
           "201": {
             "schema": {
-              "$ref": "#/definitions/SynonymResponse"
+              "$ref": "#/definitions/Synonym"
             },
             "description": "Successful request."
           },
@@ -906,7 +910,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/SynonymResponse"
+              "$ref": "#/definitions/Synonym"
             },
             "description": "Successful request.",
             "examples": {
@@ -932,6 +936,9 @@
         "tags": [
           "synonyms"
         ],
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -949,7 +956,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/SynonymResponse"
+              "$ref": "#/definitions/Synonym"
             },
             "description": "Successful request.",
             "examples": {
@@ -981,7 +988,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/EmptyObject"
+              "properties": {}
             },
             "description": "Successful request."
           },
@@ -1033,7 +1040,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/IntentCollectionResponse"
+              "$ref": "#/definitions/IntentCollection"
             },
             "description": "Successful request.",
             "examples": {
@@ -1088,7 +1095,7 @@
         "responses": {
           "201": {
             "schema": {
-              "$ref": "#/definitions/IntentResponse"
+              "$ref": "#/definitions/Intent"
             },
             "description": "Successful request.",
             "examples": {
@@ -1139,7 +1146,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/IntentExportResponse"
+              "$ref": "#/definitions/IntentExport"
             },
             "description": "Successful request.",
             "examples": {
@@ -1172,7 +1179,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/EmptyObject"
+              "properties": {}
             },
             "description": "Successful request."
           },
@@ -1187,7 +1194,7 @@
       "post": {
         "operationId": "updateIntent",
         "summary": "Update intent",
-        "description": "Update an existing intent with new or modified data. You must provide JSON data defining the content of the updated intent.",
+        "description": "Update an existing intent with new or modified data. You must provide data defining the content of the updated intent.",
         "tags": [
           "intents"
         ],
@@ -1211,7 +1218,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/IntentResponse"
+              "$ref": "#/definitions/Intent"
             },
             "description": "Successful request.",
             "examples": {
@@ -1271,7 +1278,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ExampleCollectionResponse"
+              "$ref": "#/definitions/ExampleCollection"
             },
             "description": "Successful request.",
             "examples": {
@@ -1330,7 +1337,7 @@
         "responses": {
           "201": {
             "schema": {
-              "$ref": "#/definitions/ExampleResponse"
+              "$ref": "#/definitions/Example"
             },
             "description": "Successful request."
           },
@@ -1375,7 +1382,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ExampleResponse"
+              "$ref": "#/definitions/Example"
             },
             "description": "Successful request.",
             "examples": {
@@ -1407,7 +1414,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/EmptyObject"
+              "properties": {}
             },
             "description": "Successful request."
           },
@@ -1446,7 +1453,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ExampleResponse"
+              "$ref": "#/definitions/Example"
             },
             "description": "Successful request.",
             "examples": {
@@ -1462,6 +1469,283 @@
               "$ref": "#/definitions/ErrorResponse"
             },
             "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/dialog_nodes": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "listDialogNodes",
+        "summary": "List dialog nodes",
+        "description": "List the dialog nodes in the workspace.",
+        "tags": [
+          "dialog_nodes"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PageLimitQueryParam"
+          },
+          {
+            "$ref": "#/parameters/IncludeCountQueryParam"
+          },
+          {
+            "$ref": "#/parameters/SortQueryParam"
+          },
+          {
+            "$ref": "#/parameters/CursorQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DialogNodeCollection"
+            },
+            "description": "Successful request",
+            "examples": {
+              "application/json": {
+                "dialog_nodes": [
+                  {
+                    "dialog_node": "conversation-start",
+                    "description": "",
+                    "title": "Begin Dialog",
+                    "created": "2015-12-06T23:53:59.153Z",
+                    "conditions": "!state.conversation_id",
+                    "parent": null,
+                    "previous_sibling": null,
+                    "next_step": null,
+                    "output": {
+                      "text": "Hi. How can I help you?"
+                    },
+                    "metadata": {},
+                    "context": {}
+                  },
+                  {
+                    "dialog_node": "location-atm",
+                    "description": "",
+                    "title": "ATM Location",
+                    "created": "2015-12-06T23:53:59.153Z",
+                    "conditions": "intent == location && entities.amenity == 'ATM'",
+                    "parent": "conversation-start",
+                    "previous_sibling": null,
+                    "next_step": null,
+                    "output": {
+                      "text": "The ATM is located by the elevators."
+                    },
+                    "metadata": {},
+                    "context": {}
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createDialogNode",
+        "summary": "Create dialog node",
+        "description": "Create a dialog node.",
+        "tags": [
+          "dialog_nodes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "A CreateDialogNode object defining the content of the new dialog node.",
+            "schema": {
+              "$ref": "#/definitions/CreateDialogNode"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/DialogNode"
+            },
+            "description": "Successful request",
+            "examples": {
+              "application/json": {
+                "dialog_node": "location-atm",
+                "description": "",
+                "title": "ATM Location",
+                "created": "2015-12-06T23:53:59.153Z",
+                "conditions": "intent == location && entities.amenity == 'ATM'",
+                "parent": "conversation-start",
+                "previous_sibling": null,
+                "next_step": null,
+                "output": {
+                  "text": "The ATM is located by the elevators."
+                },
+                "metadata": {},
+                "context": {}
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request"
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/dialog_nodes/{dialog_node}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/DialogNodePathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "getDialogNode",
+        "summary": "Get dialog node",
+        "description": "Get information about a dialog node.",
+        "tags": [
+          "dialog_nodes"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DialogNode"
+            },
+            "description": "Successful request",
+            "examples": {
+              "application/json": {
+                "dialog_node": "location-atm",
+                "description": "",
+                "title": "ATM Location",
+                "created": "2015-12-06T23:53:59.153Z",
+                "conditions": "intent == location && entities.amenity == 'ATM'",
+                "parent": "conversation-start",
+                "previous_sibling": null,
+                "next_step": null,
+                "output": {
+                  "text": "The ATM is located by the elevators."
+                },
+                "metadata": {},
+                "context": {}
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request"
+          }
+        }
+      },
+      "post": {
+        "operationId": "UpdateDialogNode",
+        "summary": "Update dialog node",
+        "description": "Update information for a dialog node.",
+        "tags": [
+          "dialog_nodes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "An UpdateDialogNode object defining the new contents of the dialog node.",
+            "schema": {
+              "$ref": "#/definitions/UpdateDialogNode"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DialogNode"
+            },
+            "description": "Successful request",
+            "examples": {
+              "application/json": {
+                "dialog_node": "location-atm",
+                "description": "",
+                "title": "ATM Location",
+                "created": "2015-12-06T23:53:59.153Z",
+                "conditions": "intent == location && entities.amenity == 'ATM'",
+                "parent": "conversation-start",
+                "previous_sibling": null,
+                "next_step": null,
+                "output": {
+                  "text": "The ATM is located by the elevators."
+                },
+                "context": {}
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteDialogNode",
+        "summary": "Delete dialog node",
+        "description": "Delete a dialog node from the workspace.",
+        "tags": [
+          "dialog_nodes"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "title": "EmptyObject",
+              "properties": {}
+            },
+            "description": "Successful request"
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request"
           }
         }
       }
@@ -1490,7 +1774,7 @@
             "name": "body",
             "in": "body",
             "required": false,
-            "description": "Valid JSON data defining the content of the new workspace.",
+            "description": "Valid data defining the content of the new workspace.",
             "schema": {
               "$ref": "#/definitions/CreateWorkspace"
             }
@@ -1499,7 +1783,7 @@
         "responses": {
           "201": {
             "schema": {
-              "$ref": "#/definitions/WorkspaceResponse"
+              "$ref": "#/definitions/Workspace"
             },
             "description": "Successful request.",
             "examples": {
@@ -1510,7 +1794,8 @@
                 "metadata": {},
                 "updated": "2015-12-06T23:53:59.153Z",
                 "description": "Pizza app",
-                "workspace_id": "pizza_app-e0f3"
+                "workspace_id": "pizza_app-e0f3",
+                "learning_opt_out": false
               }
             }
           },
@@ -1529,7 +1814,6 @@
         "tags": [
           "workspaces"
         ],
-        "consumes": [],
         "produces": [
           "application/json"
         ],
@@ -1550,7 +1834,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/WorkspaceCollectionResponse"
+              "$ref": "#/definitions/WorkspaceCollection"
             },
             "description": "Successful request.",
             "examples": {
@@ -1563,7 +1847,8 @@
                     "metadata": {},
                     "updated": "2015-12-06T23:53:59.153Z",
                     "description": "Pizza app",
-                    "workspace_id": "pizza_app-e0f3"
+                    "workspace_id": "pizza_app-e0f3",
+                    "learning_opt_out": false
                   }
                 ],
                 "pagination": {
@@ -1609,7 +1894,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/WorkspaceExportResponse"
+              "$ref": "#/definitions/WorkspaceExport"
             },
             "description": "Successful request.",
             "examples": {
@@ -1621,7 +1906,8 @@
                 "updated": "2015-12-06T23:53:59.153Z",
                 "description": "Pizza app",
                 "status": "Available",
-                "workspace_id": "pizza_app-e0f3"
+                "workspace_id": "pizza_app-e0f3",
+                "learning_opt_out": false
               }
             }
           },
@@ -1651,7 +1937,7 @@
             "name": "body",
             "in": "body",
             "required": false,
-            "description": "Valid JSON data defining the new workspace content. Any elements included in the new JSON will completely replace the existing elements, including all subelements. Previously existing subelements are not retained unless they are included in the new JSON.",
+            "description": "Valid data defining the new workspace content. Any elements included in the new data will completely replace the existing elements, including all subelements. Previously existing subelements are not retained unless they are included in the new data.",
             "schema": {
               "$ref": "#/definitions/UpdateWorkspace"
             }
@@ -1660,7 +1946,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/WorkspaceResponse"
+              "$ref": "#/definitions/Workspace"
             },
             "description": "Successful request.",
             "examples": {
@@ -1671,7 +1957,8 @@
                 "metadata": {},
                 "updated": "2015-12-06T23:53:59.153Z",
                 "description": "Pizza app",
-                "workspace_id": "pizza_app-e0f3"
+                "workspace_id": "pizza_app-e0f3",
+                "learning_opt_out": false
               }
             }
           },
@@ -1696,7 +1983,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/EmptyObject"
+              "properties": {}
             },
             "description": "Successful request."
           },
@@ -1713,7 +2000,6 @@
       "post": {
         "operationId": "message",
         "summary": "Get a response to a user's input",
-        "description": "",
         "tags": [
           "message"
         ],
@@ -1736,7 +2022,7 @@
             "in": "query",
             "name": "version",
             "required": true,
-            "default": "2017-04-21",
+            "default": "2017-05-26",
             "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
             "type": "string",
             "description": "Release date of the API version in YYYY-MM-DD format."
@@ -1838,8 +2124,8 @@
         }
       ],
       "get": {
+        "operationId": "listLogs",
         "summary": "List log events",
-        "description": "",
         "tags": [
           "logs"
         ],
@@ -1855,7 +2141,7 @@
             "name": "filter",
             "required": false,
             "type": "string",
-            "description": "A cacheable parameter that limits the results to those matching the specified filter."
+            "description": "A cacheable parameter that limits the results to those matching the specified filter. For more information, see the [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax)."
           },
           {
             "$ref": "#/parameters/PageLimitQueryParam"
@@ -1867,7 +2153,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/LogCollectionResponse"
+              "$ref": "#/definitions/LogCollection"
             },
             "description": "Successful request.",
             "examples": {
@@ -1948,6 +2234,13 @@
       "type": "string",
       "description": "A token identifying the last value from the previous page of results."
     },
+    "DialogNodePathParam": {
+      "in": "path",
+      "name": "dialog_node",
+      "required": true,
+      "type": "string",
+      "description": "The dialog node ID (for example, `get_order`)."
+    },
     "EntityPathParam": {
       "in": "path",
       "name": "entity",
@@ -2003,7 +2296,7 @@
       "in": "query",
       "name": "version",
       "required": true,
-      "default": "2017-04-21",
+      "default": "2017-05-26",
       "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
       "type": "string",
       "description": "Release date of the API version in YYYY-MM-DD format."
@@ -2018,6 +2311,89 @@
     }
   },
   "definitions": {
+    "BaseCounterexample": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the example to be marked as irrelevant input."
+        }
+      }
+    },
+    "BaseDialogNode": {
+      "properties": {
+        "dialog_node": {
+          "type": "string",
+          "description": "The dialog node ID."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the dialog node."
+        },
+        "conditions": {
+          "type": "string",
+          "description": "The condition that will trigger the dialog node."
+        },
+        "parent": {
+          "type": "string",
+          "description": "The ID of the parent dialog node (if any)."
+        },
+        "previous_sibling": {
+          "type": "string",
+          "description": "The previous dialog node."
+        },
+        "output": {
+          "type": "object",
+          "description": "The output of the dialog node."
+        },
+        "context": {
+          "type": "object",
+          "description": "The context for the dialog node."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata for the dialog node."
+        },
+        "next_step": {
+          "$ref": "#/definitions/DialogNodeNextStep"
+        },
+        "title": {
+          "type": "string",
+          "description": "The alias used to identify the dialog node."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "event_handler",
+            "frame",
+            "slot",
+            "response_condition"
+          ],
+          "description": "How the node is processed."
+        },
+        "event_name": {
+          "type": "string",
+          "enum": [
+            "focus",
+            "input",
+            "filled",
+            "validate",
+            "filled_multiple",
+            "generic",
+            "nomatch",
+            "nomatch_responses_depleted"
+          ],
+          "description": "How an `event_handler` node is processed."
+        },
+        "variable": {
+          "type": "string",
+          "description": "The location in the dialog context where output is stored."
+        }
+      },
+      "required": [
+        "dialog_node"
+      ]
+    },
     "BaseEntity": {
       "properties": {
         "entity": {
@@ -2068,15 +2444,18 @@
     "BaseMessage": {
       "properties": {
         "input": {
+          "description": "The user input from the request.",
           "$ref": "#/definitions/MessageInput"
         },
         "intents": {
+          "description": "An array of intents recognized in the user input, sorted in descending order of confidence",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RuntimeIntent"
           }
         },
         "entities": {
+          "description": "An array of entities identified in the user input",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RuntimeEntity"
@@ -2087,7 +2466,11 @@
           "description": "Whether to return more than one intent. `true` indicates that all matching intents are returned.",
           "default": false
         }
-      }
+      },
+      "required": [
+        "intents",
+        "entities"
+      ]
     },
     "BaseSynonym": {
       "properties": {
@@ -2141,36 +2524,28 @@
           "title": "SystemResponse",
           "description": "For internal use only.",
           "properties": {
-            "SystemResponse": {
+            "SystemResponseObject": {
               "type": "object"
             }
           }
         }
       },
-      "x-swift-store-json": true
+      "additionalProperties": {
+        "type": "object"
+      }
     },
     "CounterexampleCollection": {
       "properties": {
         "counterexamples": {
+          "description": "An array of objects describing the examples marked as irrelevant input.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExampleResponse"
-          },
-          "description": "An array of counterexamples."
-        }
-      }
-    },
-    "CounterexampleCollectionResponse": {
-      "properties": {
-        "counterexamples": {
-          "description": "An array of ExampleResponse objects describing the examples marked as irrelevant input.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExampleResponse"
+            "$ref": "#/definitions/Counterexample"
           }
         },
         "pagination": {
-          "$ref": "#/definitions/PaginationResponse"
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
         }
       },
       "required": [
@@ -2179,8 +2554,130 @@
       ]
     },
     "CreateDialogNode": {
-      "type": "object",
-      "description": "An object describing a dialog node.",
+      "properties": {
+        "dialog_node": {
+          "type": "string",
+          "description": "The dialog node ID."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the dialog node."
+        },
+        "conditions": {
+          "type": "string",
+          "description": "The condition that will trigger the dialog node."
+        },
+        "parent": {
+          "type": "string",
+          "description": "The ID of the parent dialog node (if any)."
+        },
+        "previous_sibling": {
+          "type": "string",
+          "description": "The previous dialog node."
+        },
+        "output": {
+          "type": "object",
+          "description": "The output of the dialog node."
+        },
+        "context": {
+          "type": "object",
+          "description": "The context for the dialog node."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata for the dialog node."
+        },
+        "next_step": {
+          "$ref": "#/definitions/DialogNodeNextStep"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DialogNodeAction"
+          },
+          "maxItems": 5,
+          "description": "The actions for the dialog node."
+        },
+        "title": {
+          "type": "string",
+          "description": "The alias used to identify the dialog node."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "event_handler",
+            "frame",
+            "slot",
+            "response_condition"
+          ],
+          "description": "How the dialog node is processed."
+        },
+        "event_name": {
+          "type": "string",
+          "enum": [
+            "focus",
+            "input",
+            "filled",
+            "validate",
+            "filled_multiple",
+            "generic",
+            "nomatch",
+            "nomatch_responses_depleted"
+          ],
+          "description": "How an `event_handler` node is processed."
+        },
+        "variable": {
+          "type": "string",
+          "description": "The location in the dialog context where output is stored."
+        }
+      },
+      "required": [
+        "dialog_node"
+      ]
+    },
+    "CounterexampleRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCounterexample"
+        }
+      ]
+    },
+    "Counterexample": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the counterexample."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for creation of the counterexample."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for the last update to the counterexample."
+        }
+      },
+      "required": [
+        "text",
+        "created",
+        "updated"
+      ]
+    },
+    "CreateCounterexample": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of a user input marked as irrelevant input."
+        }
+      },
+      "required": [
+        "text"
+      ],
       "x-java-builder": true
     },
     "CreateEntity": {
@@ -2202,7 +2699,8 @@
           "items": {
             "$ref": "#/definitions/CreateValue"
           },
-          "description": "An array of entity values."
+          "description": "An array of entity values.",
+          "x-item-name": "value"
         },
         "fuzzy_match": {
           "type": "boolean",
@@ -2248,7 +2746,8 @@
           "items": {
             "$ref": "#/definitions/CreateExample"
           },
-          "description": "An array of user input examples."
+          "description": "An array of user input examples.",
+          "x-item-name": "example"
         }
       },
       "required": [
@@ -2265,7 +2764,8 @@
       },
       "required": [
         "synonym"
-      ]
+      ],
+      "x-java-builder": true
     },
     "CreateValue": {
       "properties": {
@@ -2282,7 +2782,8 @@
           "items": {
             "type": "string"
           },
-          "description": "Any array of synonyms for the entity value."
+          "description": "An array of synonyms for the entity value.",
+          "x-item-name": "synonym"
         }
       },
       "required": [
@@ -2298,47 +2799,199 @@
       ],
       "x-java-builder": true
     },
+    "DialogNodeAction": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the action."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "client",
+            "server"
+          ],
+          "default": "client",
+          "description": "The type of action to invoke."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "A map of key/value pairs to be provided to the action."
+        },
+        "result_variable": {
+          "type": "string",
+          "description": "The location in the dialog context where the result of the action is stored."
+        }
+      },
+      "required": [
+        "name",
+        "result_variable"
+      ]
+    },
     "DialogNodeCollection": {
       "properties": {
         "dialog_nodes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DialogNodeResponse"
-          },
-          "description": "An array of objects describing the dialog nodes in the workspace."
+            "$ref": "#/definitions/DialogNode"
+          }
+        },
+        "pagination": {
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
         }
-      }
+      },
+      "required": [
+        "dialog_nodes",
+        "pagination"
+      ]
     },
-    "DialogNodeResponse": {
-      "type": "object",
-      "description": "An object describing a dialog node."
-    },
-    "EmptyObject": {
-       "description": "This is an empty object",
-       "type": "string"	
-    },
-    "EntityCollection": {
+    "DialogNodeNextStep": {
       "properties": {
-        "entities": {
+        "behavior": {
+          "type": "string",
+          "enum": [
+            "jump_to"
+          ],
+          "description": "How the `next_step` reference is processed."
+        },
+        "dialog_node": {
+          "type": "string",
+          "description": "The ID of the dialog node to process next."
+        },
+        "selector": {
+          "type": "string",
+          "enum": [
+            "condition",
+            "client",
+            "user_input",
+            "body"
+          ],
+          "description": "Which part of the dialog node to process next."
+        }
+      },
+      "required": [
+        "behavior"
+      ]
+    },
+    "DialogNode": {
+      "properties": {
+        "dialog_node": {
+          "type": "string",
+          "description": "The dialog node ID."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the dialog node."
+        },
+        "conditions": {
+          "type": "string",
+          "description": "The condition that triggers the dialog node."
+        },
+        "parent": {
+          "type": "string",
+          "description": "The ID of the parent dialog node."
+        },
+        "previous_sibling": {
+          "type": "string",
+          "description": "The ID of the previous sibling dialog node."
+        },
+        "output": {
+          "type": "object",
+          "description": "The output of the dialog node."
+        },
+        "context": {
+          "type": "object",
+          "description": "The context (if defined) for the dialog node."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata (if any) for the dialog node."
+        },
+        "next_step": {
+          "$ref": "#/definitions/DialogNodeNextStep"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for creation of the dialog node."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for the most recent update to the dialog node."
+        },
+        "actions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EntityExportResponse"
+            "$ref": "#/definitions/DialogNodeAction"
           },
-          "description": "An array of entities."
+          "maxItems": 5,
+          "description": "The actions for the dialog node."
+        },
+        "title": {
+          "type": "string",
+          "description": "The alias used to identify the dialog node."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "event_handler",
+            "frame",
+            "slot",
+            "response_condition"
+          ],
+          "description": "How the dialog node is processed."
+        },
+        "event_name": {
+          "type": "string",
+          "enum": [
+            "focus",
+            "input",
+            "filled",
+            "validate",
+            "filled_multiple",
+            "generic",
+            "nomatch",
+            "nomatch_responses_depleted"
+          ],
+          "description": "How an `event_handler` node is processed."
+        },
+        "variable": {
+          "type": "string",
+          "description": "The location in the dialog context where output is stored."
         }
-      }
+      },
+      "required": [
+        "created",
+        "dialog_node",
+        "description",
+        "conditions",
+        "parent",
+        "previous_sibling",
+        "output",
+        "context",
+        "metadata",
+        "next_step",
+        "title"
+      ]
     },
-    "EntityCollectionResponse": {
+    "EntityCollection": {
       "description": "An array of entities.",
       "properties": {
         "entities": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EntityExportResponse"
-          }
+            "$ref": "#/definitions/EntityExport"
+          },
+          "description": "An array of entities."
         },
         "pagination": {
-          "$ref": "#/definitions/PaginationResponse"
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
         }
       },
       "required": [
@@ -2346,13 +2999,21 @@
         "pagination"
       ]
     },
-    "EntityExportResponse": {
+    "EntityExport": {
       "allOf": [
         {
-          "$ref": "#/definitions/EntityResponse"
+          "$ref": "#/definitions/Entity"
         },
         {
-          "$ref": "#/definitions/ValueCollection"
+          "properties": {
+            "values": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ValueExport"
+              },
+              "description": "An array of entity values."
+            }
+          }
         }
       ]
     },
@@ -2368,13 +3029,14 @@
               "items": {
                 "$ref": "#/definitions/CreateValue"
               },
-              "description": "An array of entity values."
+              "description": "An array of entity values.",
+              "x-item-name": "value"
             }
           }
         }
       ]
     },
-    "EntityResponse": {
+    "Entity": {
       "properties": {
         "entity": {
           "type": "string",
@@ -2383,11 +3045,13 @@
         "created": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for creation of the entity."
         },
         "updated": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for the last update to the entity."
         },
         "description": {
@@ -2409,38 +3073,51 @@
         "updated"
       ]
     },
-    "ErrorResponse": {
+    "ErrorDetail": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Description of a specific constraint violation."
+        },
+        "path": {
+          "type": "string",
+          "description": "The location of the constraint violation."
+        }
+      },
       "required": [
-        "error"
-      ],
+        "message"
+      ]
+    },
+    "ErrorResponse": {
       "properties": {
         "error": {
-          "type": "string"
+          "type": "string",
+          "description": "General description of an error."
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "Collection of specific constraint violations associated with the error."
         }
-      }
+      },
+      "required": [
+        "error"
+      ]
     },
     "ExampleCollection": {
       "properties": {
         "examples": {
           "type": "array",
+          "description": "An array of Example objects describing the examples defined for the intent.",
           "items": {
-            "$ref": "#/definitions/ExampleResponse"
-          },
-          "description": "An array of user input examples."
-        }
-      }
-    },
-    "ExampleCollectionResponse": {
-      "properties": {
-        "examples": {
-          "type": "array",
-          "description": "An array of ExampleResponse objects describing the examples defined for the intent.",
-          "items": {
-            "$ref": "#/definitions/ExampleResponse"
+            "$ref": "#/definitions/Example"
           }
         },
         "pagination": {
-          "$ref": "#/definitions/PaginationResponse"
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
         }
       },
       "required": [
@@ -2455,27 +3132,29 @@
         }
       ]
     },
-    "ExampleResponse": {
+    "Example": {
       "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the example."
+        },
         "created": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for creation of the example."
         },
         "updated": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for the last update to the example."
-        },
-        "text": {
-          "type": "string",
-          "description": "The text of the example."
         }
       },
       "required": [
+        "text",
         "created",
-        "updated",
-        "text"
+        "updated"
       ]
     },
     "InputData": {
@@ -2489,30 +3168,21 @@
           "type": "string",
           "description": "The text of the user input."
         }
-      }
+      },
+      "x-java-builder": true
     },
     "IntentCollection": {
       "properties": {
         "intents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IntentExportResponse"
-          },
-          "description": "An array of intents."
-        }
-      }
-    },
-    "IntentCollectionResponse": {
-      "properties": {
-        "intents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IntentExportResponse"
+            "$ref": "#/definitions/IntentExport"
           },
           "description": "An array of intents."
         },
         "pagination": {
-          "$ref": "#/definitions/PaginationResponse"
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
         }
       },
       "required": [
@@ -2520,13 +3190,22 @@
         "pagination"
       ]
     },
-    "IntentExportResponse": {
+    "IntentExport": {
       "allOf": [
         {
-          "$ref": "#/definitions/IntentResponse"
+          "$ref": "#/definitions/Intent"
         },
         {
-          "$ref": "#/definitions/ExampleCollection"
+          "properties": {
+            "examples": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Example"
+              },
+              "description": "An array of user input examples.",
+              "x-item-name": "example"
+            }
+          }
         }
       ]
     },
@@ -2542,14 +3221,14 @@
               "description": "An array of user input examples for the intent.",
               "items": {
                 "$ref": "#/definitions/CreateExample"
-              }
+              },
+              "x-item-name": "example"
             }
           }
         }
-      ],
-      "x-java-builder": true
+      ]
     },
-    "IntentResponse": {
+    "Intent": {
       "properties": {
         "intent": {
           "type": "string",
@@ -2558,11 +3237,13 @@
         "created": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for creation of the intent."
         },
         "updated": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for the last update to the intent."
         },
         "description": {
@@ -2576,17 +3257,18 @@
         "updated"
       ]
     },
-    "LogCollectionResponse": {
+    "LogCollection": {
       "properties": {
         "logs": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LogExportResponse"
+            "$ref": "#/definitions/LogExport"
           },
           "description": "An array of log events."
         },
         "pagination": {
-          "$ref": "#/definitions/PaginationResponse"
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/LogPagination"
         }
       },
       "required": [
@@ -2594,14 +3276,14 @@
         "pagination"
       ]
     },
-    "LogExportResponse": {
+    "LogExport": {
       "allOf": [
         {
-          "$ref": "#/definitions/LogResponse"
+          "$ref": "#/definitions/Log"
         }
       ]
     },
-    "LogMessageResponse": {
+    "LogMessage": {
       "type": "object",
       "description": "Log message details.",
       "properties": {
@@ -2619,16 +3301,24 @@
           "description": "The text of the message."
         }
       },
-      "x-swift-store-json": true
+      "required": [
+        "level",
+        "msg"
+      ],
+      "additionalProperties": {
+        "type": "object"
+      }
     },
-    "LogResponse": {
+    "Log": {
       "allOf": [
         {
           "properties": {
             "request": {
+              "description": "A request formatted for the Conversation service.",
               "$ref": "#/definitions/MessageRequest"
             },
             "response": {
+              "description": "A response from the Conversation service.",
               "$ref": "#/definitions/MessageResponse"
             },
             "log_id": {
@@ -2654,6 +3344,19 @@
         }
       ]
     },
+    "LogPagination": {
+      "description": "The pagination data for the returned objects.",
+      "properties": {
+        "next_url": {
+          "type": "string",
+          "description": "The URL that will return the next page of results."
+        },
+        "matched": {
+          "type": "integer",
+          "description": "Reserved for future use."
+        }
+      }
+    },
     "MessageInput": {
       "description": "An input object that includes the input text.",
       "properties": {
@@ -2661,16 +3364,14 @@
           "type": "string",
           "description": "The user's input."
         }
-      },
-      "required": [
-        "text"
-      ]
+      }
     },
     "MessageRequest": {
       "type": "object",
       "description": "A request formatted for the Conversation service.",
       "properties": {
         "input": {
+          "description": "An input object that includes the input text.",
           "$ref": "#/definitions/InputData"
         },
         "alternate_intents": {
@@ -2679,14 +3380,15 @@
           "default": false
         },
         "context": {
+          "description": "State information for the conversation. Continue a conversation by including the context object from the previous response.",
           "$ref": "#/definitions/Context"
         },
         "entities": {
           "type": "array",
+          "description": "Include the entities from the previous response when they do not need to change and to prevent Watson from trying to identify them.",
           "items": {
             "$ref": "#/definitions/RuntimeEntity"
           },
-          "description": "Include the entities from the previous response when they do not need to change and to prevent Watson from trying to identify them.",
           "x-item-name": "entity"
         },
         "intents": {
@@ -2698,19 +3400,16 @@
           "x-item-name": "intent"
         },
         "output": {
+          "description": "System output. Include the output from the request when you have several requests within the same Dialog turn to pass back in the intermediate information.",
           "$ref": "#/definitions/OutputData"
         }
       },
-      "required": [
-        "input"
-      ],
       "example": {
         "input": {
           "text": "Turn on the lights"
         },
         "alternate_intents": true
-      },
-      "x-java-builder": true
+      }
     },
     "MessageResponse": {
       "description": "A response from the Conversation service.",
@@ -2721,21 +3420,23 @@
         {
           "properties": {
             "context": {
-              "$ref": "#/definitions/RuntimeContext"
+              "description": "State information for the conversation",
+              "$ref": "#/definitions/Context"
             },
             "output": {
-              "$ref": "#/definitions/RuntimeOutput"
+              "description": "Output from the dialog, including the response to the user, the nodes that were triggered, and log messages",
+              "$ref": "#/definitions/OutputData"
             }
+          },
+          "required": [
+            "context",
+            "output"
+          ],
+          "additionalProperties": {
+            "type": "object"
           }
         }
-      ],
-      "required": [
-        "intents",
-        "entities",
-        "context",
-        "output"
-      ],
-      "x-swift-store-json": true
+      ]
     },
     "OutputData": {
       "type": "object",
@@ -2749,27 +3450,29 @@
           "type": "array",
           "description": "Up to 50 messages logged with the request.",
           "items": {
-            "$ref": "#/definitions/LogMessageResponse"
+            "$ref": "#/definitions/LogMessage"
           }
         },
         "text": {
           "type": "array",
-          "description": "Responses to the user.",
+          "description": "An array of responses to the user.",
           "items": {
             "type": "string"
           }
         },
         "nodes_visited": {
           "type": "array",
-          "description": "The nodes that were executed to create the response.",
+          "description": "An array of the nodes that were triggered to create the response.",
           "items": {
             "type": "string"
           }
         }
       },
-      "x-swift-store-json": true
+      "additionalProperties": {
+        "type": "object"
+      }
     },
-    "PaginationResponse": {
+    "Pagination": {
       "description": "The pagination data for the returned objects.",
       "properties": {
         "refresh_url": {
@@ -2793,36 +3496,13 @@
         "refresh_url"
       ]
     },
-    "RuntimeContext": {
-      "description": "For internal use only.",
-      "properties": {
-        "conversation_id": {
-          "type": "string",
-          "description": "The unique identifier of the conversation."
-        },
-        "system": {
-          "title": "RuntimeSystemContext",
-          "description": "For internal use only.",
-          "properties": {
-            "RuntimeSystemContext": {
-              "type": "object"
-            }
-          }
-        }
-      },
-      "required": [
-        "system"
-      ],
-      "x-swift-store-json": true
-    },
     "RuntimeEntity": {
       "description": "A term from the request that was identified as an entity.",
       "type": "object",
       "required": [
         "entity",
         "location",
-        "value",
-        "confidence"
+        "value"
       ],
       "properties": {
         "entity": {
@@ -2845,6 +3525,10 @@
         "confidence": {
           "type": "number",
           "description": "A decimal percentage that represents Watson's confidence in the entity."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata for the entity."
         }
       },
       "example": {
@@ -2856,7 +3540,9 @@
         "value": "light",
         "metadata": {}
       },
-      "x-swift-store-json": true
+      "additionalProperties": {
+        "type": "object"
+      }
     },
     "RuntimeIntent": {
       "type": "object",
@@ -2876,60 +3562,22 @@
           "description": "A decimal percentage that represents Watson's confidence in the intent."
         }
       },
-      "x-swift-store-json": true
-    },
-    "RuntimeLogMessage": {
-      "properties": {
-        "level": {
-          "type": "string",
-          "description": "The severity of the message (info, error, or warn)."
-        },
-        "msg": {
-          "type": "string",
-          "description": "The text of the message."
-        }
-      },
-      "required": [
-        "level",
-        "msg"
-      ]
-    },
-    "RuntimeOutput": {
-      "properties": {
-        "text": {
-          "type": "array",
-          "description": "An array of responses to the user.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "log_messages": {
-          "type": "array",
-          "description": "Up to 50 messages logged with the request",
-          "items": {
-            "$ref": "#/definitions/RuntimeLogMessage"
-          }
-        },
-        "nodes_visited": {
-          "type": "array",
-          "description": "An array of the nodes that were triggered to create the response.",
-          "items": {
-            "type": "string"
-          }
-        }
+      "additionalProperties": {
+        "type": "object"
       }
     },
-    "SynonymCollectionResponse": {
+    "SynonymCollection": {
       "properties": {
         "synonyms": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SynonymResponse"
+            "$ref": "#/definitions/Synonym"
           },
           "description": "An array of synonyms."
         },
         "pagination": {
-          "$ref": "#/definitions/PaginationResponse"
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
         }
       },
       "required": [
@@ -2944,7 +3592,7 @@
         }
       ]
     },
-    "SynonymResponse": {
+    "Synonym": {
       "properties": {
         "synonym": {
           "type": "string",
@@ -2953,11 +3601,13 @@
         "created": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for creation of the synonym."
         },
         "updated": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for the most recent update to the synonym."
         }
       },
@@ -2965,6 +3615,32 @@
         "synonym",
         "created",
         "updated"
+      ]
+    },
+    "UpdateDialogNode": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseDialogNode"
+        },
+        {
+          "properties": {
+            "actions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DialogNodeAction"
+              },
+              "maxItems": 5,
+              "description": "The actions for the dialog node."
+            }
+          }
+        }
+      ]
+    },
+    "UpdateCounterexample": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CounterexampleRequest"
+        }
       ]
     },
     "UpdateEntity": {
@@ -2979,16 +3655,14 @@
         {
           "$ref": "#/definitions/ExampleRequest"
         }
-      ],
-      "x-java-builder": true
+      ]
     },
     "UpdateIntent": {
       "allOf": [
         {
           "$ref": "#/definitions/IntentRequest"
         }
-      ],
-      "x-java-builder": true
+      ]
     },
     "UpdateSynonym": {
       "allOf": [
@@ -3009,31 +3683,20 @@
         {
           "$ref": "#/definitions/WorkspaceRequest"
         }
-      ],
-      "x-java-builder": true
+      ]
     },
     "ValueCollection": {
       "properties": {
         "values": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ValueExportResponse"
-          },
-          "description": "An array of entity values."
-        }
-      }
-    },
-    "ValueCollectionResponse": {
-      "properties": {
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValueExportResponse"
+            "$ref": "#/definitions/ValueExport"
           },
           "description": "An array of entity values."
         },
         "pagination": {
-          "$ref": "#/definitions/PaginationResponse"
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
         }
       },
       "required": [
@@ -3041,10 +3704,10 @@
         "pagination"
       ]
     },
-    "ValueExportResponse": {
+    "ValueExport": {
       "allOf": [
         {
-          "$ref": "#/definitions/ValueResponse"
+          "$ref": "#/definitions/Value"
         },
         {
           "properties": {
@@ -3070,13 +3733,15 @@
               "type": "array",
               "items": {
                 "type": "string"
-              }
+              },
+              "description": "An array of synonyms for the entity value.",
+              "x-item-name": "synonym"
             }
           }
         }
       ]
     },
-    "ValueResponse": {
+    "Value": {
       "properties": {
         "value": {
           "type": "string",
@@ -3089,32 +3754,34 @@
         "created": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for creation of the entity value."
         },
         "updated": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for the last update to the entity value."
         }
       },
       "required": [
         "value",
-        "metadata",
         "created",
         "updated"
       ]
     },
-    "WorkspaceCollectionResponse": {
+    "WorkspaceCollection": {
       "properties": {
         "workspaces": {
           "type": "array",
           "description": "An array of workspaces.",
           "items": {
-            "$ref": "#/definitions/WorkspaceResponse"
+            "$ref": "#/definitions/Workspace"
           }
         },
         "pagination": {
-          "$ref": "#/definitions/PaginationResponse"
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
         }
       },
       "required": [
@@ -3134,55 +3801,47 @@
               "description": "An array of objects defining the intents for the workspace.",
               "items": {
                 "$ref": "#/definitions/CreateIntent"
-              }
-            }
-          }
-        },
-        {
-          "properties": {
+              },
+              "x-item-name": "intent"
+            },
             "entities": {
               "type": "array",
               "description": "An array of objects defining the entities for the workspace.",
               "items": {
                 "$ref": "#/definitions/CreateEntity"
-              }
-            }
-          }
-        },
-        {
-          "properties": {
+              },
+              "x-item-name": "entity"
+            },
             "dialog_nodes": {
               "type": "array",
               "description": "An array of objects defining the nodes in the workspace dialog.",
               "items": {
-                "$ref": "#/definitions/CreateDialogNode"
-              }
-            }
-          }
-        },
-        {
-          "properties": {
+                "$ref": "#/definitions/DialogNode"
+              },
+              "x-item-name": "dialog_node"
+            },
             "counterexamples": {
               "type": "array",
               "description": "An array of objects defining input examples that have been marked as irrelevant input.",
               "items": {
-                "$ref": "#/definitions/CreateExample"
-              }
-            }
-          }
-        },
-        {
-          "properties": {
+                "$ref": "#/definitions/CreateCounterexample"
+              },
+              "x-item-name": "counterexample"
+            },
             "metadata": {
               "type": "object",
               "description": "Any metadata related to the workspace."
+            },
+            "learning_opt_out": {
+              "type": "boolean",
+              "default": false,
+              "description": "Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used."
             }
           }
         }
-      ],
-      "x-java-builder": true
+      ]
     },
-    "WorkspaceResponse": {
+    "Workspace": {
       "properties": {
         "name": {
           "type": "string",
@@ -3195,15 +3854,18 @@
         "created": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for creation of the workspace."
         },
         "updated": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for the last update to the workspace."
         },
         "workspace_id": {
           "type": "string",
+          "readOnly": true,
           "description": "The workspace ID."
         },
         "description": {
@@ -3213,6 +3875,11 @@
         "metadata": {
           "type": "object",
           "description": "Any metadata that is required by the workspace."
+        },
+        "learning_opt_out": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used."
         }
       },
       "required": [
@@ -3223,7 +3890,7 @@
         "workspace_id"
       ]
     },
-    "WorkspaceStatusResponse": {
+    "WorkspaceStatus": {
       "properties": {
         "name": {
           "type": "string",
@@ -3244,15 +3911,18 @@
         "created": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for creation of the workspace."
         },
         "updated": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The timestamp for the last update to the workspace."
         },
         "workspace_id": {
           "type": "string",
+          "readOnly": true,
           "description": "The workspace ID."
         },
         "status": {
@@ -3265,6 +3935,11 @@
             "Available",
             "Unavailable"
           ]
+        },
+        "learning_opt_out": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used."
         }
       },
       "required": [
@@ -3275,25 +3950,48 @@
         "created",
         "updated",
         "workspace_id",
-        "status"
+        "status",
+        "learning_opt_out"
       ]
     },
-    "WorkspaceExportResponse": {
+    "WorkspaceExport": {
       "allOf": [
         {
-          "$ref": "#/definitions/WorkspaceStatusResponse"
+          "$ref": "#/definitions/WorkspaceStatus"
         },
         {
-          "$ref": "#/definitions/IntentCollection"
-        },
-        {
-          "$ref": "#/definitions/EntityCollection"
-        },
-        {
-          "$ref": "#/definitions/CounterexampleCollection"
-        },
-        {
-          "$ref": "#/definitions/DialogNodeCollection"
+          "properties": {
+            "intents": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IntentExport"
+              },
+              "description": "An array of intents.",
+              "x-item-name": "intent"
+            },
+            "entities": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityExport"
+              },
+              "description": "An array of entities.",
+              "x-item-name": "entity"
+            },
+            "counterexamples": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Counterexample"
+              },
+              "description": "An array of counterexamples."
+            },
+            "dialog_nodes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DialogNode"
+              },
+              "description": "An array of objects describing the dialog nodes in the workspace."
+            }
+          }
         }
       ]
     }

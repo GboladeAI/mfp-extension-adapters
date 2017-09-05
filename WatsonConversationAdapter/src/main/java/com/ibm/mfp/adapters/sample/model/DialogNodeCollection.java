@@ -27,7 +27,8 @@ package com.ibm.mfp.adapters.sample.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.ibm.mfp.adapters.sample.model.DialogNodeResponse;
+import com.ibm.mfp.adapters.sample.model.DialogNode;
+import com.ibm.mfp.adapters.sample.model.Pagination;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
@@ -49,36 +50,57 @@ import javax.validation.constraints.*;
 /**
  * DialogNodeCollection
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class DialogNodeCollection   {
   @JsonProperty("dialog_nodes")
-  private List<DialogNodeResponse> dialogNodes = null;
+  private List<DialogNode> dialogNodes = new ArrayList<DialogNode>();
 
-  public DialogNodeCollection dialogNodes(List<DialogNodeResponse> dialogNodes) {
+  @JsonProperty("pagination")
+  private Pagination pagination = null;
+
+  public DialogNodeCollection dialogNodes(List<DialogNode> dialogNodes) {
     this.dialogNodes = dialogNodes;
     return this;
   }
 
-  public DialogNodeCollection addDialogNodesItem(DialogNodeResponse dialogNodesItem) {
-    if (this.dialogNodes == null) {
-      this.dialogNodes = new ArrayList<DialogNodeResponse>();
-    }
+  public DialogNodeCollection addDialogNodesItem(DialogNode dialogNodesItem) {
     this.dialogNodes.add(dialogNodesItem);
     return this;
   }
 
    /**
-   * An array of objects describing the dialog nodes in the workspace.
+   * Get dialogNodes
    * @return dialogNodes
   **/
   @JsonProperty("dialog_nodes")
-  @ApiModelProperty(value = "An array of objects describing the dialog nodes in the workspace.")
-  public List<DialogNodeResponse> getDialogNodes() {
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+  public List<DialogNode> getDialogNodes() {
     return dialogNodes;
   }
 
-  public void setDialogNodes(List<DialogNodeResponse> dialogNodes) {
+  public void setDialogNodes(List<DialogNode> dialogNodes) {
     this.dialogNodes = dialogNodes;
+  }
+
+  public DialogNodeCollection pagination(Pagination pagination) {
+    this.pagination = pagination;
+    return this;
+  }
+
+   /**
+   * An object defining the pagination data for the returned objects.
+   * @return pagination
+  **/
+  @JsonProperty("pagination")
+  @ApiModelProperty(required = true, value = "An object defining the pagination data for the returned objects.")
+  @NotNull
+  public Pagination getPagination() {
+    return pagination;
+  }
+
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
   }
 
 
@@ -91,12 +113,13 @@ public class DialogNodeCollection   {
       return false;
     }
     DialogNodeCollection dialogNodeCollection = (DialogNodeCollection) o;
-    return Objects.equals(this.dialogNodes, dialogNodeCollection.dialogNodes);
+    return Objects.equals(this.dialogNodes, dialogNodeCollection.dialogNodes) &&
+        Objects.equals(this.pagination, dialogNodeCollection.pagination);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(dialogNodes);
+    return Objects.hash(dialogNodes, pagination);
   }
 
 
@@ -106,6 +129,7 @@ public class DialogNodeCollection   {
     sb.append("class DialogNodeCollection {\n");
     
     sb.append("    dialogNodes: ").append(toIndentedString(dialogNodes)).append("\n");
+    sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -30,6 +30,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.ibm.mfp.adapters.sample.model.SystemResponse;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.HashMap;
+import java.util.Map;
 import javax.validation.constraints.*;
 
 /*
@@ -48,8 +50,8 @@ import javax.validation.constraints.*;
  * Context information for the message. Include the context from the previous response to maintain state for the conversation.
  */
 @ApiModel(description = "Context information for the message. Include the context from the previous response to maintain state for the conversation.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
-public class Context   {
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
+public class Context extends HashMap<String, Object>  {
   @JsonProperty("conversation_id")
   private String conversationId = null;
 
@@ -106,12 +108,13 @@ public class Context   {
     }
     Context context = (Context) o;
     return Objects.equals(this.conversationId, context.conversationId) &&
-        Objects.equals(this.system, context.system);
+        Objects.equals(this.system, context.system) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(conversationId, system);
+    return Objects.hash(conversationId, system, super.hashCode());
   }
 
 
@@ -119,7 +122,7 @@ public class Context   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Context {\n");
-    
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
     sb.append("    system: ").append(toIndentedString(system)).append("\n");
     sb.append("}");

@@ -27,10 +27,10 @@ package com.ibm.mfp.adapters.sample.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.ibm.mfp.adapters.sample.model.CreateDialogNode;
+import com.ibm.mfp.adapters.sample.model.CreateCounterexample;
 import com.ibm.mfp.adapters.sample.model.CreateEntity;
-import com.ibm.mfp.adapters.sample.model.CreateExample;
 import com.ibm.mfp.adapters.sample.model.CreateIntent;
+import com.ibm.mfp.adapters.sample.model.DialogNode;
 import com.ibm.mfp.adapters.sample.model.WorkspaceRequest;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -53,7 +53,7 @@ import javax.validation.constraints.*;
 /**
  * CreateWorkspace
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class CreateWorkspace   {
   @JsonProperty("name")
   private String name = null;
@@ -71,13 +71,16 @@ public class CreateWorkspace   {
   private List<CreateEntity> entities = null;
 
   @JsonProperty("dialog_nodes")
-  private List<CreateDialogNode> dialogNodes = null;
+  private List<DialogNode> dialogNodes = null;
 
   @JsonProperty("counterexamples")
-  private List<CreateExample> counterexamples = null;
+  private List<CreateCounterexample> counterexamples = null;
 
   @JsonProperty("metadata")
   private Object metadata = null;
+
+  @JsonProperty("learning_opt_out")
+  private Boolean learningOptOut = false;
 
   public CreateWorkspace name(String name) {
     this.name = name;
@@ -190,14 +193,14 @@ public class CreateWorkspace   {
     this.entities = entities;
   }
 
-  public CreateWorkspace dialogNodes(List<CreateDialogNode> dialogNodes) {
+  public CreateWorkspace dialogNodes(List<DialogNode> dialogNodes) {
     this.dialogNodes = dialogNodes;
     return this;
   }
 
-  public CreateWorkspace addDialogNodesItem(CreateDialogNode dialogNodesItem) {
+  public CreateWorkspace addDialogNodesItem(DialogNode dialogNodesItem) {
     if (this.dialogNodes == null) {
-      this.dialogNodes = new ArrayList<CreateDialogNode>();
+      this.dialogNodes = new ArrayList<DialogNode>();
     }
     this.dialogNodes.add(dialogNodesItem);
     return this;
@@ -209,22 +212,22 @@ public class CreateWorkspace   {
   **/
   @JsonProperty("dialog_nodes")
   @ApiModelProperty(value = "An array of objects defining the nodes in the workspace dialog.")
-  public List<CreateDialogNode> getDialogNodes() {
+  public List<DialogNode> getDialogNodes() {
     return dialogNodes;
   }
 
-  public void setDialogNodes(List<CreateDialogNode> dialogNodes) {
+  public void setDialogNodes(List<DialogNode> dialogNodes) {
     this.dialogNodes = dialogNodes;
   }
 
-  public CreateWorkspace counterexamples(List<CreateExample> counterexamples) {
+  public CreateWorkspace counterexamples(List<CreateCounterexample> counterexamples) {
     this.counterexamples = counterexamples;
     return this;
   }
 
-  public CreateWorkspace addCounterexamplesItem(CreateExample counterexamplesItem) {
+  public CreateWorkspace addCounterexamplesItem(CreateCounterexample counterexamplesItem) {
     if (this.counterexamples == null) {
-      this.counterexamples = new ArrayList<CreateExample>();
+      this.counterexamples = new ArrayList<CreateCounterexample>();
     }
     this.counterexamples.add(counterexamplesItem);
     return this;
@@ -236,11 +239,11 @@ public class CreateWorkspace   {
   **/
   @JsonProperty("counterexamples")
   @ApiModelProperty(value = "An array of objects defining input examples that have been marked as irrelevant input.")
-  public List<CreateExample> getCounterexamples() {
+  public List<CreateCounterexample> getCounterexamples() {
     return counterexamples;
   }
 
-  public void setCounterexamples(List<CreateExample> counterexamples) {
+  public void setCounterexamples(List<CreateCounterexample> counterexamples) {
     this.counterexamples = counterexamples;
   }
 
@@ -263,6 +266,25 @@ public class CreateWorkspace   {
     this.metadata = metadata;
   }
 
+  public CreateWorkspace learningOptOut(Boolean learningOptOut) {
+    this.learningOptOut = learningOptOut;
+    return this;
+  }
+
+   /**
+   * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+   * @return learningOptOut
+  **/
+  @JsonProperty("learning_opt_out")
+  @ApiModelProperty(value = "Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.")
+  public Boolean getLearningOptOut() {
+    return learningOptOut;
+  }
+
+  public void setLearningOptOut(Boolean learningOptOut) {
+    this.learningOptOut = learningOptOut;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -280,12 +302,13 @@ public class CreateWorkspace   {
         Objects.equals(this.entities, createWorkspace.entities) &&
         Objects.equals(this.dialogNodes, createWorkspace.dialogNodes) &&
         Objects.equals(this.counterexamples, createWorkspace.counterexamples) &&
-        Objects.equals(this.metadata, createWorkspace.metadata);
+        Objects.equals(this.metadata, createWorkspace.metadata) &&
+        Objects.equals(this.learningOptOut, createWorkspace.learningOptOut);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, language, intents, entities, dialogNodes, counterexamples, metadata);
+    return Objects.hash(name, description, language, intents, entities, dialogNodes, counterexamples, metadata, learningOptOut);
   }
 
 
@@ -302,6 +325,7 @@ public class CreateWorkspace   {
     sb.append("    dialogNodes: ").append(toIndentedString(dialogNodes)).append("\n");
     sb.append("    counterexamples: ").append(toIndentedString(counterexamples)).append("\n");
     sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
+    sb.append("    learningOptOut: ").append(toIndentedString(learningOptOut)).append("\n");
     sb.append("}");
     return sb.toString();
   }

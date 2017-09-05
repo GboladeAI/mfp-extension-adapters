@@ -54,7 +54,7 @@ import javax.validation.constraints.*;
  * A request formatted for the Conversation service.
  */
 @ApiModel(description = "A request formatted for the Conversation service.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class MessageRequest   {
   @JsonProperty("input")
   private InputData input = null;
@@ -80,12 +80,11 @@ public class MessageRequest   {
   }
 
    /**
-   * Get input
+   * An input object that includes the input text.
    * @return input
   **/
   @JsonProperty("input")
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
+  @ApiModelProperty(value = "An input object that includes the input text.")
   public InputData getInput() {
     return input;
   }
@@ -119,11 +118,11 @@ public class MessageRequest   {
   }
 
    /**
-   * Get context
+   * State information for the conversation. Continue a conversation by including the context object from the previous response.
    * @return context
   **/
   @JsonProperty("context")
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "State information for the conversation. Continue a conversation by including the context object from the previous response.")
   public Context getContext() {
     return context;
   }
@@ -192,11 +191,11 @@ public class MessageRequest   {
   }
 
    /**
-   * Get output
+   * System output. Include the output from the request when you have several requests within the same Dialog turn to pass back in the intermediate information.
    * @return output
   **/
   @JsonProperty("output")
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "System output. Include the output from the request when you have several requests within the same Dialog turn to pass back in the intermediate information.")
   public OutputData getOutput() {
     return output;
   }

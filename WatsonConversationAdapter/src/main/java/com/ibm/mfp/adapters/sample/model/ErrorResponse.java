@@ -27,8 +27,11 @@ package com.ibm.mfp.adapters.sample.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.ibm.mfp.adapters.sample.model.ErrorDetail;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.constraints.*;
 
 /*
@@ -46,10 +49,13 @@ import javax.validation.constraints.*;
 /**
  * ErrorResponse
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class ErrorResponse   {
   @JsonProperty("error")
   private String error = null;
+
+  @JsonProperty("errors")
+  private List<ErrorDetail> errors = null;
 
   public ErrorResponse error(String error) {
     this.error = error;
@@ -57,11 +63,11 @@ public class ErrorResponse   {
   }
 
    /**
-   * Get error
+   * General description of an error.
    * @return error
   **/
   @JsonProperty("error")
-  @ApiModelProperty(required = true, value = "")
+  @ApiModelProperty(required = true, value = "General description of an error.")
   @NotNull
   public String getError() {
     return error;
@@ -69,6 +75,33 @@ public class ErrorResponse   {
 
   public void setError(String error) {
     this.error = error;
+  }
+
+  public ErrorResponse errors(List<ErrorDetail> errors) {
+    this.errors = errors;
+    return this;
+  }
+
+  public ErrorResponse addErrorsItem(ErrorDetail errorsItem) {
+    if (this.errors == null) {
+      this.errors = new ArrayList<ErrorDetail>();
+    }
+    this.errors.add(errorsItem);
+    return this;
+  }
+
+   /**
+   * Collection of specific constraint violations associated with the error.
+   * @return errors
+  **/
+  @JsonProperty("errors")
+  @ApiModelProperty(value = "Collection of specific constraint violations associated with the error.")
+  public List<ErrorDetail> getErrors() {
+    return errors;
+  }
+
+  public void setErrors(List<ErrorDetail> errors) {
+    this.errors = errors;
   }
 
 
@@ -81,12 +114,13 @@ public class ErrorResponse   {
       return false;
     }
     ErrorResponse errorResponse = (ErrorResponse) o;
-    return Objects.equals(this.error, errorResponse.error);
+    return Objects.equals(this.error, errorResponse.error) &&
+        Objects.equals(this.errors, errorResponse.errors);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(error);
+    return Objects.hash(error, errors);
   }
 
 
@@ -96,6 +130,7 @@ public class ErrorResponse   {
     sb.append("class ErrorResponse {\n");
     
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
+    sb.append("    errors: ").append(toIndentedString(errors)).append("\n");
     sb.append("}");
     return sb.toString();
   }

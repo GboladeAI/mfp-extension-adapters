@@ -27,7 +27,8 @@ package com.ibm.mfp.adapters.sample.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.ibm.mfp.adapters.sample.model.ExampleResponse;
+import com.ibm.mfp.adapters.sample.model.Example;
+import com.ibm.mfp.adapters.sample.model.Pagination;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
@@ -49,36 +50,57 @@ import javax.validation.constraints.*;
 /**
  * ExampleCollection
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class ExampleCollection   {
   @JsonProperty("examples")
-  private List<ExampleResponse> examples = null;
+  private List<Example> examples = new ArrayList<Example>();
 
-  public ExampleCollection examples(List<ExampleResponse> examples) {
+  @JsonProperty("pagination")
+  private Pagination pagination = null;
+
+  public ExampleCollection examples(List<Example> examples) {
     this.examples = examples;
     return this;
   }
 
-  public ExampleCollection addExamplesItem(ExampleResponse examplesItem) {
-    if (this.examples == null) {
-      this.examples = new ArrayList<ExampleResponse>();
-    }
+  public ExampleCollection addExamplesItem(Example examplesItem) {
     this.examples.add(examplesItem);
     return this;
   }
 
    /**
-   * An array of user input examples.
+   * An array of Example objects describing the examples defined for the intent.
    * @return examples
   **/
   @JsonProperty("examples")
-  @ApiModelProperty(value = "An array of user input examples.")
-  public List<ExampleResponse> getExamples() {
+  @ApiModelProperty(required = true, value = "An array of Example objects describing the examples defined for the intent.")
+  @NotNull
+  public List<Example> getExamples() {
     return examples;
   }
 
-  public void setExamples(List<ExampleResponse> examples) {
+  public void setExamples(List<Example> examples) {
     this.examples = examples;
+  }
+
+  public ExampleCollection pagination(Pagination pagination) {
+    this.pagination = pagination;
+    return this;
+  }
+
+   /**
+   * An object defining the pagination data for the returned objects.
+   * @return pagination
+  **/
+  @JsonProperty("pagination")
+  @ApiModelProperty(required = true, value = "An object defining the pagination data for the returned objects.")
+  @NotNull
+  public Pagination getPagination() {
+    return pagination;
+  }
+
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
   }
 
 
@@ -91,12 +113,13 @@ public class ExampleCollection   {
       return false;
     }
     ExampleCollection exampleCollection = (ExampleCollection) o;
-    return Objects.equals(this.examples, exampleCollection.examples);
+    return Objects.equals(this.examples, exampleCollection.examples) &&
+        Objects.equals(this.pagination, exampleCollection.pagination);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(examples);
+    return Objects.hash(examples, pagination);
   }
 
 
@@ -106,6 +129,7 @@ public class ExampleCollection   {
     sb.append("class ExampleCollection {\n");
     
     sb.append("    examples: ").append(toIndentedString(examples)).append("\n");
+    sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
     sb.append("}");
     return sb.toString();
   }

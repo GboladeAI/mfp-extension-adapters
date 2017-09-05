@@ -47,7 +47,7 @@ import javax.validation.constraints.*;
  * An input object that includes the input text.
  */
 @ApiModel(description = "An input object that includes the input text.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class MessageInput   {
   @JsonProperty("text")
   private String text = null;
@@ -62,8 +62,7 @@ public class MessageInput   {
    * @return text
   **/
   @JsonProperty("text")
-  @ApiModelProperty(required = true, value = "The user's input.")
-  @NotNull
+  @ApiModelProperty(value = "The user's input.")
   public String getText() {
     return text;
   }

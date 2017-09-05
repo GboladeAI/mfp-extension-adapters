@@ -27,7 +27,8 @@ package com.ibm.mfp.adapters.sample.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.ibm.mfp.adapters.sample.model.IntentExportResponse;
+import com.ibm.mfp.adapters.sample.model.IntentExport;
+import com.ibm.mfp.adapters.sample.model.Pagination;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
@@ -49,20 +50,20 @@ import javax.validation.constraints.*;
 /**
  * IntentCollection
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class IntentCollection   {
   @JsonProperty("intents")
-  private List<IntentExportResponse> intents = null;
+  private List<IntentExport> intents = new ArrayList<IntentExport>();
 
-  public IntentCollection intents(List<IntentExportResponse> intents) {
+  @JsonProperty("pagination")
+  private Pagination pagination = null;
+
+  public IntentCollection intents(List<IntentExport> intents) {
     this.intents = intents;
     return this;
   }
 
-  public IntentCollection addIntentsItem(IntentExportResponse intentsItem) {
-    if (this.intents == null) {
-      this.intents = new ArrayList<IntentExportResponse>();
-    }
+  public IntentCollection addIntentsItem(IntentExport intentsItem) {
     this.intents.add(intentsItem);
     return this;
   }
@@ -72,13 +73,34 @@ public class IntentCollection   {
    * @return intents
   **/
   @JsonProperty("intents")
-  @ApiModelProperty(value = "An array of intents.")
-  public List<IntentExportResponse> getIntents() {
+  @ApiModelProperty(required = true, value = "An array of intents.")
+  @NotNull
+  public List<IntentExport> getIntents() {
     return intents;
   }
 
-  public void setIntents(List<IntentExportResponse> intents) {
+  public void setIntents(List<IntentExport> intents) {
     this.intents = intents;
+  }
+
+  public IntentCollection pagination(Pagination pagination) {
+    this.pagination = pagination;
+    return this;
+  }
+
+   /**
+   * An object defining the pagination data for the returned objects.
+   * @return pagination
+  **/
+  @JsonProperty("pagination")
+  @ApiModelProperty(required = true, value = "An object defining the pagination data for the returned objects.")
+  @NotNull
+  public Pagination getPagination() {
+    return pagination;
+  }
+
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
   }
 
 
@@ -91,12 +113,13 @@ public class IntentCollection   {
       return false;
     }
     IntentCollection intentCollection = (IntentCollection) o;
-    return Objects.equals(this.intents, intentCollection.intents);
+    return Objects.equals(this.intents, intentCollection.intents) &&
+        Objects.equals(this.pagination, intentCollection.pagination);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(intents);
+    return Objects.hash(intents, pagination);
   }
 
 
@@ -106,6 +129,7 @@ public class IntentCollection   {
     sb.append("class IntentCollection {\n");
     
     sb.append("    intents: ").append(toIndentedString(intents)).append("\n");
+    sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
     sb.append("}");
     return sb.toString();
   }

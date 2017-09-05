@@ -31,7 +31,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.validation.constraints.*;
 
 /*
@@ -50,8 +52,8 @@ import javax.validation.constraints.*;
  * A term from the request that was identified as an entity.
  */
 @ApiModel(description = "A term from the request that was identified as an entity.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
-public class RuntimeEntity   {
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
+public class RuntimeEntity extends HashMap<String, Object>  {
   @JsonProperty("entity")
   private String entity = null;
 
@@ -63,6 +65,9 @@ public class RuntimeEntity   {
 
   @JsonProperty("confidence")
   private BigDecimal confidence = null;
+
+  @JsonProperty("metadata")
+  private Object metadata = null;
 
   public RuntimeEntity entity(String entity) {
     this.entity = entity;
@@ -139,14 +144,32 @@ public class RuntimeEntity   {
    * @return confidence
   **/
   @JsonProperty("confidence")
-  @ApiModelProperty(required = true, value = "A decimal percentage that represents Watson's confidence in the entity.")
-  @NotNull
+  @ApiModelProperty(value = "A decimal percentage that represents Watson's confidence in the entity.")
   public BigDecimal getConfidence() {
     return confidence;
   }
 
   public void setConfidence(BigDecimal confidence) {
     this.confidence = confidence;
+  }
+
+  public RuntimeEntity metadata(Object metadata) {
+    this.metadata = metadata;
+    return this;
+  }
+
+   /**
+   * The metadata for the entity.
+   * @return metadata
+  **/
+  @JsonProperty("metadata")
+  @ApiModelProperty(value = "The metadata for the entity.")
+  public Object getMetadata() {
+    return metadata;
+  }
+
+  public void setMetadata(Object metadata) {
+    this.metadata = metadata;
   }
 
 
@@ -162,12 +185,14 @@ public class RuntimeEntity   {
     return Objects.equals(this.entity, runtimeEntity.entity) &&
         Objects.equals(this.location, runtimeEntity.location) &&
         Objects.equals(this.value, runtimeEntity.value) &&
-        Objects.equals(this.confidence, runtimeEntity.confidence);
+        Objects.equals(this.confidence, runtimeEntity.confidence) &&
+        Objects.equals(this.metadata, runtimeEntity.metadata) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(entity, location, value, confidence);
+    return Objects.hash(entity, location, value, confidence, metadata, super.hashCode());
   }
 
 
@@ -175,11 +200,12 @@ public class RuntimeEntity   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class RuntimeEntity {\n");
-    
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    entity: ").append(toIndentedString(entity)).append("\n");
     sb.append("    location: ").append(toIndentedString(location)).append("\n");
     sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
+    sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -51,16 +51,16 @@ import javax.validation.constraints.*;
 /**
  * BaseMessage
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class BaseMessage   {
   @JsonProperty("input")
   private MessageInput input = null;
 
   @JsonProperty("intents")
-  private List<RuntimeIntent> intents = null;
+  private List<RuntimeIntent> intents = new ArrayList<RuntimeIntent>();
 
   @JsonProperty("entities")
-  private List<RuntimeEntity> entities = null;
+  private List<RuntimeEntity> entities = new ArrayList<RuntimeEntity>();
 
   @JsonProperty("alternate_intents")
   private Boolean alternateIntents = false;
@@ -71,11 +71,11 @@ public class BaseMessage   {
   }
 
    /**
-   * Get input
+   * The user input from the request.
    * @return input
   **/
   @JsonProperty("input")
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "The user input from the request.")
   public MessageInput getInput() {
     return input;
   }
@@ -90,19 +90,17 @@ public class BaseMessage   {
   }
 
   public BaseMessage addIntentsItem(RuntimeIntent intentsItem) {
-    if (this.intents == null) {
-      this.intents = new ArrayList<RuntimeIntent>();
-    }
     this.intents.add(intentsItem);
     return this;
   }
 
    /**
-   * Get intents
+   * An array of intents recognized in the user input, sorted in descending order of confidence
    * @return intents
   **/
   @JsonProperty("intents")
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "An array of intents recognized in the user input, sorted in descending order of confidence")
+  @NotNull
   public List<RuntimeIntent> getIntents() {
     return intents;
   }
@@ -117,19 +115,17 @@ public class BaseMessage   {
   }
 
   public BaseMessage addEntitiesItem(RuntimeEntity entitiesItem) {
-    if (this.entities == null) {
-      this.entities = new ArrayList<RuntimeEntity>();
-    }
     this.entities.add(entitiesItem);
     return this;
   }
 
    /**
-   * Get entities
+   * An array of entities identified in the user input
    * @return entities
   **/
   @JsonProperty("entities")
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "An array of entities identified in the user input")
+  @NotNull
   public List<RuntimeEntity> getEntities() {
     return entities;
   }

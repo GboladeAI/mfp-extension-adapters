@@ -29,6 +29,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.HashMap;
+import java.util.Map;
 import javax.validation.constraints.*;
 
 /*
@@ -47,8 +49,8 @@ import javax.validation.constraints.*;
  * An intent identified in the user input.
  */
 @ApiModel(description = "An intent identified in the user input.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
-public class RuntimeIntent   {
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
+public class RuntimeIntent extends HashMap<String, Object>  {
   @JsonProperty("intent")
   private String intent = null;
 
@@ -106,12 +108,13 @@ public class RuntimeIntent   {
     }
     RuntimeIntent runtimeIntent = (RuntimeIntent) o;
     return Objects.equals(this.intent, runtimeIntent.intent) &&
-        Objects.equals(this.confidence, runtimeIntent.confidence);
+        Objects.equals(this.confidence, runtimeIntent.confidence) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(intent, confidence);
+    return Objects.hash(intent, confidence, super.hashCode());
   }
 
 
@@ -119,7 +122,7 @@ public class RuntimeIntent   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class RuntimeIntent {\n");
-    
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    intent: ").append(toIndentedString(intent)).append("\n");
     sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
     sb.append("}");

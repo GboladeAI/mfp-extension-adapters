@@ -27,7 +27,8 @@ package com.ibm.mfp.adapters.sample.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.ibm.mfp.adapters.sample.model.ValueExportResponse;
+import com.ibm.mfp.adapters.sample.model.Pagination;
+import com.ibm.mfp.adapters.sample.model.ValueExport;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
@@ -49,20 +50,20 @@ import javax.validation.constraints.*;
 /**
  * ValueCollection
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class ValueCollection   {
   @JsonProperty("values")
-  private List<ValueExportResponse> values = null;
+  private List<ValueExport> values = new ArrayList<ValueExport>();
 
-  public ValueCollection values(List<ValueExportResponse> values) {
+  @JsonProperty("pagination")
+  private Pagination pagination = null;
+
+  public ValueCollection values(List<ValueExport> values) {
     this.values = values;
     return this;
   }
 
-  public ValueCollection addValuesItem(ValueExportResponse valuesItem) {
-    if (this.values == null) {
-      this.values = new ArrayList<ValueExportResponse>();
-    }
+  public ValueCollection addValuesItem(ValueExport valuesItem) {
     this.values.add(valuesItem);
     return this;
   }
@@ -72,13 +73,34 @@ public class ValueCollection   {
    * @return values
   **/
   @JsonProperty("values")
-  @ApiModelProperty(value = "An array of entity values.")
-  public List<ValueExportResponse> getValues() {
+  @ApiModelProperty(required = true, value = "An array of entity values.")
+  @NotNull
+  public List<ValueExport> getValues() {
     return values;
   }
 
-  public void setValues(List<ValueExportResponse> values) {
+  public void setValues(List<ValueExport> values) {
     this.values = values;
+  }
+
+  public ValueCollection pagination(Pagination pagination) {
+    this.pagination = pagination;
+    return this;
+  }
+
+   /**
+   * An object defining the pagination data for the returned objects.
+   * @return pagination
+  **/
+  @JsonProperty("pagination")
+  @ApiModelProperty(required = true, value = "An object defining the pagination data for the returned objects.")
+  @NotNull
+  public Pagination getPagination() {
+    return pagination;
+  }
+
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
   }
 
 
@@ -91,12 +113,13 @@ public class ValueCollection   {
       return false;
     }
     ValueCollection valueCollection = (ValueCollection) o;
-    return Objects.equals(this.values, valueCollection.values);
+    return Objects.equals(this.values, valueCollection.values) &&
+        Objects.equals(this.pagination, valueCollection.pagination);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(values);
+    return Objects.hash(values, pagination);
   }
 
 
@@ -106,6 +129,7 @@ public class ValueCollection   {
     sb.append("class ValueCollection {\n");
     
     sb.append("    values: ").append(toIndentedString(values)).append("\n");
+    sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
     sb.append("}");
     return sb.toString();
   }

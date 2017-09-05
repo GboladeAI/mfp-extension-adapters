@@ -47,7 +47,7 @@ import javax.validation.constraints.*;
 /**
  * UpdateSynonym
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-04T16:39:33.075+05:30")
 public class UpdateSynonym   {
   @JsonProperty("synonym")
   private String synonym = null;
