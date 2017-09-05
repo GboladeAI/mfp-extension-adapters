@@ -47,7 +47,7 @@ import javax.validation.constraints.*;
  * Set the Rule status to active or inactive
  */
 @ApiModel(description = "Set the Rule status to active or inactive")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-08-16T15:08:23.571+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-05T11:47:26.811+05:30")
 public class RuleSet   {
   @JsonProperty("status")
   private String status = null;

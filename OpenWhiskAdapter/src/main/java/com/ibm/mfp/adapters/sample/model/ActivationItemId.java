@@ -46,7 +46,7 @@ import javax.validation.constraints.*;
 /**
  * ActivationItemId
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-08-16T15:08:23.571+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-05T11:47:26.811+05:30")
 public class ActivationItemId   {
   @JsonProperty("activationId")
   private String activationId = null;

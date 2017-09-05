@@ -21,7 +21,7 @@
     ],
     "host":"openwhisk.ng.bluemix.net",
     "schemes":[
-      "http"
+      "https"
     ],
     "basePath": "/api/v1",
     "tags": [

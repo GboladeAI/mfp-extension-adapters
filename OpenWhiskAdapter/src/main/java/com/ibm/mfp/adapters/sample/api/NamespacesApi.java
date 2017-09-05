@@ -56,11 +56,14 @@ import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.*;
 import javax.validation.constraints.*;
 
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.ConnectionSpec;
+
 @Path("/namespaces")
 
 @Produces({ "application/json" })
 @io.swagger.annotations.Api(description = "the namespaces API")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-08-16T15:08:23.571+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-05T11:47:26.811+05:30")
 public class NamespacesApi  {
 	@Context
         ConfigurationAPI configurationApi;
@@ -85,6 +88,10 @@ public class NamespacesApi  {
     public Response deleteAction(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of action",required=true) @PathParam("actionName") String actionName,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskActionsClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskActionsClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -137,6 +144,10 @@ public class NamespacesApi  {
     public Response deletePackage(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of package",required=true) @PathParam("packageName") String packageName,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskPackagesClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskPackagesClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -189,6 +200,10 @@ public class NamespacesApi  {
     public Response deleteRule(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of rule to delete",required=true) @PathParam("ruleName") String ruleName,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskRulesClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskRulesClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -241,6 +256,10 @@ public class NamespacesApi  {
     public Response deleteTrigger(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of trigger to delete",required=true) @PathParam("triggerName") String triggerName,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskTriggersClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskTriggersClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -295,6 +314,10 @@ public class NamespacesApi  {
     public Response fireTrigger(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of trigger being fired",required=true) @PathParam("triggerName") String triggerName,@ApiParam(value = "The trigger payload" ,required=true) KeyValue payload,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskTriggersClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskTriggersClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -347,6 +370,10 @@ public class NamespacesApi  {
     public Response getActionByName(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of action to fetch",required=true) @PathParam("actionName") String actionName,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskActionsClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskActionsClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -399,6 +426,10 @@ public class NamespacesApi  {
     public Response getActivationById(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of activation to fetch",required=true) @PathParam("activationid") String activationid,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskActivationsClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskActivationsClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -449,6 +480,10 @@ public class NamespacesApi  {
     public Response getActivations(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of item") @QueryParam("name") String name,@ApiParam(value = "Number of entities to include in the result.") @QueryParam("limit") Integer limit,@ApiParam(value = "Number of entities to skip in the result.") @QueryParam("skip") Integer skip,@ApiParam(value = "Only include entities later than this timestamp (measured in milliseconds since Thu, 01 Jan 1970)") @QueryParam("since") Integer since,@ApiParam(value = "Only include entities earlier than this timestamp (measured in milliseconds since Thu, 01 Jan 1970)") @QueryParam("upto") Integer upto,@ApiParam(value = "Whether to include full entity description.") @QueryParam("docs") Boolean docs,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskActivationsClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskActivationsClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -499,6 +534,10 @@ public class NamespacesApi  {
     public Response getAlPackages(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Include publicly shared entitles in the result.") @QueryParam("public") Boolean _public,@ApiParam(value = "Number of entities to include in the result.") @QueryParam("limit") Integer limit,@ApiParam(value = "Number of entities to skip in the result.") @QueryParam("skip") Integer skip,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskPackagesClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskPackagesClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -549,6 +588,10 @@ public class NamespacesApi  {
     public Response getAllActions(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Number of entities to include in the result.") @QueryParam("limit") Integer limit,@ApiParam(value = "Number of entities to skip in the result.") @QueryParam("skip") Integer skip,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskActionsClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskActionsClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -599,6 +642,10 @@ public class NamespacesApi  {
     public Response getAllEntitiesInNamespace(@ApiParam(value = "The namespace",required=true) @PathParam("namespace") String namespace,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskNamespacesClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskNamespacesClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -649,6 +696,10 @@ public class NamespacesApi  {
     public Response getAllNamespaces(@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskNamespacesClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskNamespacesClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -699,6 +750,10 @@ public class NamespacesApi  {
     public Response getAllRules(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Number of entities to include in the result.") @QueryParam("limit") Integer limit,@ApiParam(value = "Number of entities to skip in the result.") @QueryParam("skip") Integer skip,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskRulesClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskRulesClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -749,6 +804,10 @@ public class NamespacesApi  {
     public Response getAllTriggers(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Number of entities to include in the result.") @QueryParam("limit") Integer limit,@ApiParam(value = "Number of entities to skip in the result.") @QueryParam("skip") Integer skip,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskTriggersClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskTriggersClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -801,6 +860,10 @@ public class NamespacesApi  {
     public Response getPackageByName(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of package to fetch",required=true) @PathParam("packageName") String packageName,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskPackagesClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskPackagesClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -853,6 +916,10 @@ public class NamespacesApi  {
     public Response getRuleByName(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of rule to fetch",required=true) @PathParam("ruleName") String ruleName,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskRulesClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskRulesClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -905,6 +972,10 @@ public class NamespacesApi  {
     public Response getTriggerByName(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of trigger to fetch",required=true) @PathParam("triggerName") String triggerName,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskTriggersClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskTriggersClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -964,6 +1035,10 @@ public class NamespacesApi  {
 ) @QueryParam("blocking") String blocking,@ApiParam(value = "Wait no more than specified duration in milliseconds for a blocking response. Default value and max allowed timeout are 60000.") @QueryParam("timeout") Integer timeout,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskActionsClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskActionsClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -1016,6 +1091,10 @@ public class NamespacesApi  {
     public Response namespacesNamespaceActivationsActivationidLogsGet(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of activation to fetch",required=true) @PathParam("activationid") String activationid,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskActivationsClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskActivationsClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -1068,6 +1147,10 @@ public class NamespacesApi  {
     public Response namespacesNamespaceActivationsActivationidResultGet(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of activation to fetch",required=true) @PathParam("activationid") String activationid,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskActivationsClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskActivationsClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -1122,6 +1205,10 @@ public class NamespacesApi  {
     public Response setState(@ApiParam(value = "The entity namespace",required=true) @PathParam("namespace") String namespace,@ApiParam(value = "Name of rule to update",required=true) @PathParam("ruleName") String ruleName,@ApiParam(value = "Set state to active or inactive" ,required=true) RuleSet state,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskRulesClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskRulesClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -1172,6 +1259,10 @@ public class NamespacesApi  {
 ) @QueryParam("overwrite") String overwrite,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskActionsClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskActionsClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -1229,6 +1320,10 @@ public class NamespacesApi  {
 ) @QueryParam("overwrite") String overwrite,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskPackagesClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskPackagesClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -1286,6 +1381,10 @@ public class NamespacesApi  {
 ) @QueryParam("overwrite") String overwrite,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskRulesClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskRulesClientApi(apiAuthInstance);
         String retval = "NA";
         
@@ -1343,6 +1442,10 @@ public class NamespacesApi  {
 ) @QueryParam("overwrite") String overwrite,@Context SecurityContext securityContext)
     throws NotFoundException {
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
+        
+	OkHttpClient client =  apiAuthInstance.getHttpClient();
+	client.setConnectionSpecs(Arrays.asList(new ConnectionSpec[]{new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).allEnabledCipherSuites().build()}));
+
         com.ibm.mfp.adapters.sample.api.OpenWhiskTriggersClientApi apiInstance = new com.ibm.mfp.adapters.sample.api.OpenWhiskTriggersClientApi(apiAuthInstance);
         String retval = "NA";
         

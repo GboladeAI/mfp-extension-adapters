@@ -51,7 +51,7 @@ import javax.validation.constraints.*;
  * A restricted Trigger view that elides properties that are auto-assigned or derived from the URI (i.e., the namespace and name).
  */
 @ApiModel(description = "A restricted Trigger view that elides properties that are auto-assigned or derived from the URI (i.e., the namespace and name).")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-08-16T15:08:23.571+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-05T11:47:26.811+05:30")
 public class TriggerPut   {
   @JsonProperty("version")
   private String version = null;

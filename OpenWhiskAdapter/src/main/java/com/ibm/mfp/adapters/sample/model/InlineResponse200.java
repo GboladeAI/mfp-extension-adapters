@@ -49,7 +49,7 @@ import javax.validation.constraints.*;
 /**
  * InlineResponse200
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-08-16T15:08:23.571+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-05T11:47:26.811+05:30")
 public class InlineResponse200   {
   @JsonProperty("actions")
   private List<EntityBrief> actions = new ArrayList<EntityBrief>();

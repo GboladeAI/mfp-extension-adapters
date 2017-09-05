@@ -44,7 +44,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-08-16T15:08:23.571+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-09-05T11:47:26.811+05:30")
 public abstract class NamespacesApiService {
     public abstract Response deleteAction(String namespace,String actionName,SecurityContext securityContext) throws NotFoundException;
     public abstract Response deletePackage(String namespace,String packageName,SecurityContext securityContext) throws NotFoundException;
