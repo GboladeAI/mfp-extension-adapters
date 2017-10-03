@@ -1,0 +1,247 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>mfp.server.adapter-extensions</groupId>
+        <artifactId>extentions</artifactId>
+        <version>8.0.2017062210</version>
+        <relativePath>../../</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>mfp.server.adapter-extensions</groupId>
+    <artifactId>WatsonToneAnalyzer</artifactId>
+	<version>8.0.2017062210</version>
+	<packaging>adapter</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.ibm.mfp</groupId>
+			<artifactId>adapter-maven-api</artifactId>
+			<scope>provided</scope>
+			<version>8.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+      		<groupId>junit</groupId>
+      		<artifactId>junit</artifactId>
+      		<version>4.11</version>
+      		<scope>test</scope>
+    	</dependency>
+		<dependency>
+			<groupId>com.ibm.mfp</groupId>
+			<artifactId>mfp-security-checks-base</artifactId>
+			<version>8.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<scope>provided</scope>
+			<version>1.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160212</version>
+		</dependency>
+
+		<dependency>
+      		<groupId>org.testng</groupId>
+      		<artifactId>testng</artifactId>
+      		<version>6.8.8</version>
+      		<scope>test</scope>
+      		<exclusions>
+        		<exclusion>
+          			<artifactId>junit</artifactId>
+          			<groupId>junit</groupId>
+        		</exclusion>
+        		<exclusion>
+          			<artifactId>snakeyaml</artifactId>
+          			<groupId>org.yaml</groupId>
+        		</exclusion>
+        		<exclusion>
+          			<artifactId>bsh</artifactId>
+          			<groupId>org.beanshell</groupId>
+        		</exclusion>
+      		</exclusions>
+    	</dependency>
+        <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>WatsonToneAnalyzer</artifactId>
+                <version>1.0.0</version>
+                <scope>system</scope>
+                <systemPath>${project.basedir}/lib/WatsonToneAnalyzer-1.0.0.jar</systemPath>
+                </dependency>
+			<!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-core -->
+			 <dependency>
+					<groupId>com.sun.jersey</groupId>
+					<artifactId>jersey-core</artifactId>
+					<version>1.11</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.sun.jersey.contribs/jersey-multipart -->
+			<!-- Replaced with glassfish -->
+				<!-- <dependency>
+						<groupId>com.sun.jersey.contribs</groupId>
+						<artifactId>jersey-multipart</artifactId>
+						<version>1.17</version>
+			</dependency> -->
+	<!-- changes start from here -->
+<!--	  <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-jersey2-jaxrs</artifactId>
+      <scope>compile</scope>
+      <version>${swagger-core-version}</version>
+    </dependency> -->
+
+ <!-- https://mvnrepository.com/artifact/io.swagger/swagger-jaxrs -->
+ <dependency>
+    <groupId>io.swagger</groupId>
+    <artifactId>swagger-jaxrs</artifactId>
+    <version>${swagger-core-version}</version>
+</dependency>
+
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>logging-interceptor</artifactId>
+            <version>${okhttp-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${jodatime-version}</version>
+        </dependency>
+       <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+          <version>2.7.3</version>
+     </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback-version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback-version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>${servlet-api-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet-core</artifactId>
+      <version>${jersey2-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.media</groupId>
+      <artifactId>jersey-media-multipart</artifactId>
+      <version>${jersey2-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-joda</artifactId>
+      <version>${jackson-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.jaxrs</groupId>
+      <artifactId>jackson-jaxrs-json-provider</artifactId>
+      <version>${jackson-version}</version>
+    </dependency>
+    <!-- Base64 encoding that works in both JVM and Android -->
+    <dependency>
+      <groupId>com.brsanthu</groupId>
+      <artifactId>migbase64</artifactId>
+      <version>2.2</version>
+    </dependency>
+
+
+    <!-- Bean Validation API support -->
+    <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>1.1.0.Final</version>
+        <scope>provided</scope>
+    </dependency>
+
+
+	</dependencies>
+	<properties>
+		<!-- parameters for deploy mfp adapter -->
+		<mfpfUrl>http://localhost:9080/mfpadmin</mfpfUrl>
+		<mfpfUser>admin</mfpfUser>
+		<mfpfPassword>admin</mfpfPassword>
+		<mfpfRuntime>mfp</mfpfRuntime>
+
+	<java.version>1.7</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <swagger-core-version>1.5.12</swagger-core-version>
+    <okhttp-version>2.7.5</okhttp-version>
+    <gson-version>2.6.2</gson-version>
+    <jodatime-version>2.9.3</jodatime-version>
+    <maven-plugin-version>1.0.0</maven-plugin-version>
+    <junit-version>4.12</junit-version>
+    <jetty-version>9.2.9.v20150224</jetty-version>
+    <jersey2-version>2.22.2</jersey2-version>
+    <jackson-version>2.8.7</jackson-version>
+    <logback-version>1.1.7</logback-version>
+    <servlet-api-version>2.5</servlet-api-version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+		<build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.6</version>
+		<configuration>
+			<failOnMissingWebXml>false</failOnMissingWebXml>
+		</configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+				<groupId>com.ibm.mfp</groupId>
+				<artifactId>adapter-maven-plugin</artifactId>
+				<extensions>true</extensions>
+		</plugin>
+    </plugins>
+  </build>
+</project>
