@@ -1,0 +1,536 @@
+{
+    "swagger": "2.0",
+    "basePath": "/tone-analyzer/api",
+    "info": {
+        "version": "3.3.4",
+        "title": "Tone Analyzer",
+        "description": "### Service Overview\nThe IBM Watson&trade; Tone Analyzer service uses linguistic analysis to detect emotional, social, and language tones in written text. The service can analyze tone at both the document and sentence levels. You can use the service to understand how your written communications are perceived and then to improve the tone of your communications. Businesses can use the service to learn the tone of their customers' communications and to respond to each customer appropriately, or to understand and improve their customer conversations.\n### API Usage\nThe following information provides details about using the service to analyze tone:\n* **The tone method:** The service offers `GET` and `POST /v3/tone` methods that use the general purpose endpoint to analyze the tone of input content. The methods accept a maximum of 128 KB of content in JSON, plain text, or HTML format.\n* **The tone_chat method:** The service offers a `POST /v3/tone_chat` method that uses the customer engagement endpoint to analyze the tone of customer service and customer support conversations. The method accepts a maximum of 128 KB of content in JSON format.\n* **Authentication:** You authenticate to the service by using your service credentials. You can use your credentials to authenticate via a proxy server that resides in Bluemix, or you can use your credentials to obtain a token and contact the service directly. See [Service credentials for Watson services](https://console.bluemix.net/docs/services/watson/getting-started-credentials.html) and [Tokens for authentication](https://console.bluemix.net/docs/services/watson/getting-started-tokens.html).\n* **Request Logging:** By default, all Watson services log requests and their results. Data is collected only to improve the Watson services. If you do not want to share your data, set the header parameter `X-Watson-Learning-Opt-Out` to `true` for each request. Data is collected for any request that omits this header. See [Controlling request logging for Watson services](https://console.bluemix.net/docs/services/watson/getting-started-logging.html). \n\nFor more information about the service, see [About Tone Analyzer](https://console.bluemix.net/docs/services/tone-analyzer/index.html).",
+        "x-vcap-service-name": "tone_analyzer"
+    },
+    "securityDefinitions":{
+  "basicAuth": {
+     "type": "basic",
+     "description": "HTTP Basic Authentication."
+   }
+  },
+  "security":[
+   {
+     "basicAuth": []
+   }
+  ],
+  "host": "gateway.watsonplatform.net",
+  "schemes": [
+  "https"
+  ],
+   "basePath":"/tone-analyzer/api",
+    "tags": [
+        {
+            "name": "tone"
+        }
+    ],
+    "paths": {
+        "/v3/tone": {
+            "get": {
+                "operationId": "GetTone",
+                "summary": "Analyze general purpose tone",
+                "description": "Uses the general purpose endpoint to analyze the tone of your input content. The service can analyze the input for several tones: emotion, language, and social. It derives various characteristics for each tone that it analyzes. The method always analyzes the tone of the full document; by default, it also analyzes the tone of each individual sentence of the input. You can submit a maximum of 128 KB of content in plain text format. \n\nPer the HTTP specification, the default encoding for plain text is ISO-8859-1 (effectively, the ASCII character set). Include the `charset` parameter to indicate the character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. \n\nUse the `GET` request method to analyze smaller quantities of plain text content. Use the `POST` request method to analyze larger amounts of content in any of the available formats.",
+                "tags": [
+                    "tone"
+                ],
+                "consumes": [
+                    "text/plain"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "text",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "description": "Plain text input that contains the content to be analyzed. You must URL-encode the input. Submit a maximum of 128 KB of content. Sentences with fewer than three words cannot be analyzed."
+                    },
+                    {
+                        "name": "tones",
+                        "in": "query",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                             "type": "string",
+                             "enum": [
+                               "emotion",
+                               "language",
+                               "social"
+                             ]
+                        },
+                        "x-item-name": "tone",
+                        "description": "A comma-separated list of tones for which the service is to return its analysis of the input; the indicated tones apply both to the full document and to individual sentences of the document. You can specify one or more of the following values: `emotion`, `language`, and `social`. Omit the parameter to request results for all three tones."
+                    },
+                    {
+                        "name": "sentences",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of the full document. If `true` (the default), the service returns results for each sentence. The service returns results only for the first 100 sentences of the input."
+                    },
+                    {
+                        "name": "version",
+                        "in": "query",
+                        "description": "The requested version of the response format as a date in the form `YYYY-MM-DD`; for example, specify `2016-05-19` for May 19, 2016. The parameter allows the service to update its interface and response format for new versions without breaking existing clients. \n\nThe date that you specify does not need to match a version of the service exactly; the service replies with the response format whose version is no later than the date you provide. If you specify a date that is earlier than the initial release of version 3, the service returns the response format for that version. If you specify a date that is in the future or otherwise later than the most recent version, the service returns the response format for the latest version.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ToneAnalysis"
+                        },
+                        "description": "**OK**. The request succeeded."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Bad Request**. A required input parameter is null or a specified input parameter or header value is invalid or not supported."
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Unauthorized**. Access is denied due to invalid service credentials."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Not Found**. A requested item or parameter does not exist."
+                    },
+                    "429": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Too Many Requests**. Your organization ID submitted more than 1200 requests per minute, so the service is throttling your calls."
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Internal Server Error**. The service encountered an internal error."
+                    }
+                },
+                "x-sdk-exclude": true
+            },
+            "post": {
+                "operationId": "tone",
+                "summary": "Analyze general purpose tone",
+                "description": "Uses the general purpose endpoint to analyze the tone of your input content. The service can analyze the input for several tones: emotion, language, and social. It derives various characteristics for each tone that it analyzes. The method always analyzes the tone of the full document; by default, it also analyzes the tone of each individual sentence of the input. You can submit a maximum of 128 KB of content in JSON, plain text, or HTML format. \n\nPer the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the service removes HTML tags and analyzes only the textual content. \n\nUse the `POST` request method to analyze larger amounts of content in any of the available formats. Use the `GET` request method to analyze smaller quantities of plain text content.",
+                "tags": [
+                    "tone"
+                ],
+                "consumes": [
+                    "application/json",
+                    "text/plain",
+                    "text/html"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tone_input",
+                        "in": "body",
+                        "required": true,
+                        "description": "JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of type `ToneInput`. Submit a maximum of 128 KB of content. Sentences with fewer than three words cannot be analyzed.",
+                        "schema": {
+                            "$ref": "#/definitions/ToneInput"
+                        }
+                    },
+                    {
+                        "name": "tones",
+                        "in": "query",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                             "type": "string",
+                             "enum": [
+                               "emotion",
+                               "language",
+                               "social"
+                             ]
+                        },
+                        "x-item-name": "tone",
+                        "description": "A comma-separated list of tones for which the service is to return its analysis of the input; the indicated tones apply both to the full document and to individual sentences of the document. You can specify one or more of the following values: `emotion`, `language`, and `social`. Omit the parameter to request results for all three tones."
+                    },
+                    {
+                        "name": "sentences",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of the full document. If `true` (the default), the service returns results for each sentence. The service returns results only for the first 100 sentences of the input."
+                    },
+                    {
+                        "name": "version",
+                        "in": "query",
+                        "description": "The requested version of the response format as a date in the form `YYYY-MM-DD`; for example, specify `2016-05-19` for May 19, 2016. The parameter allows the service to update its interface and response format for new versions without breaking existing clients. \n\nThe date that you specify does not need to match a version of the service exactly; the service replies with the response format whose version is no later than the date you provide. If you specify a date that is earlier than the initial release of version 3, the service returns the response format for that version. If you specify a date that is in the future or otherwise later than the most recent version, the service returns the response format for the latest version.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ToneAnalysis"
+                        },
+                        "description": "**OK**. The request succeeded."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Bad Request**. A required input parameter is null or a specified input parameter or header value is invalid or not supported."
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Unauthorized**. Access is denied due to invalid service credentials."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Not Found**. A requested item or parameter does not exist."
+                    },
+                    "429": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Too Many Requests**. Your organization ID submitted more than 1200 requests per minute, so the service is throttling your calls."
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Internal Server Error**. The service encountered an internal error."
+                    }
+                }
+            }
+        },
+        "/v3/tone_chat": {
+            "post": {
+                "operationId": "toneChat",
+                "summary": "Analyze customer engagement tone",
+                "description": "Uses the customer engagement endpoint to analyze the tone of customer service and customer support conversations. For each utterance of a conversation, the method reports the most prevalent subset of the following seven tones: sad, frustrated, satisfied, excited, polite, impolite, and sympathetic. You can submit a maximum of 128 KB of JSON input. Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8.",
+                "tags": [
+                    "tone"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "utterances",
+                        "in": "body",
+                        "required": true,
+                        "description": "A JSON object that contains the content to be analyzed.",
+                        "schema": {
+                            "$ref": "#/definitions/ToneChatInput"
+                        }
+                    },
+                    {
+                        "name": "version",
+                        "in": "query",
+                        "description": "The requested version of the response format as a date in the form `YYYY-MM-DD`; for example, specify `2016-05-19` for May 19, 2016. The parameter allows the service to update its interface and response format for new versions without breaking existing clients. \n\nThe date that you specify does not need to match a version of the service exactly; the service replies with the response format whose version is no later than the date you provide. If you specify a date that is earlier than the initial release of version 3, the service returns the response format for that version. If you specify a date that is in the future or otherwise later than the most recent version, the service returns the response format for the latest version.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/UtteranceAnalyses"
+                        },
+                        "description": "**OK**. The request succeeded."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Bad Request**. A required input parameter is null or a specified input parameter or header value is invalid or not supported."
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Unauthorized**. Access is denied due to invalid service credentials."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Not Found**. A requested item or parameter does not exist."
+                    },
+                    "429": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Too Many Requests**. Your organization ID submitted more than 1200 requests per minute, so the service is throttling your calls."
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "**Internal Server Error**. The service encountered an internal error."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ToneInput": {
+            "required": [
+                "text"
+            ],
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "description": "The input content that the service is to analyze. Sentences with fewer than three words cannot be analyzed."
+                }
+            }
+        },
+        "ToneChatInput": {
+            "required": [
+                "utterances"
+            ],
+            "properties": {
+                "utterances": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Utterance"
+                    },
+                    "description": "An array of `Utterance` objects that provides the input content that the service is to analyze."
+                }
+            }
+        },
+        "Utterance": {
+            "required": [
+                "text"
+            ],
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "description": "An utterance contributed by a user in the conversation that is to be analyzed. The utterance can contain multiple sentences."
+                },
+                "user": {
+                    "type": "string",
+                    "description": "A string that identifies the user who contributed the utterance specified by the `text` parameter."
+                }
+            },
+            "x-java-builder": true
+        },
+        "ToneAnalysis": {
+            "required": [
+                "document_tone"
+            ],
+            "properties": {
+                "document_tone": {
+                    "type": "object",
+                    "$ref": "#/definitions/DocumentAnalysis",
+                    "description": "An object of type `DocumentAnalysis` that provides the results for the full document of the input content."
+                },
+                "sentences_tone": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SentenceAnalysis"
+                    },
+                    "description": "An array of `SentenceAnalysis` objects that provides the results for the individual sentences of the input content. The service returns results only for the first 100 sentences of the input. The field is omitted if the `sentences` parameter of the request is set to `false`."
+                }
+            }
+        },
+        "DocumentAnalysis": {
+            "required": [
+                "tone_categories"
+            ],
+            "properties": {
+                "tone_categories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ToneCategory"
+                    },
+                    "description": "An array of `ToneCategory` objects that provides the results of the tone analysis for the full document of the input content. The service returns results only for the tones specified with the `tones` parameter of the request."
+                }
+            }
+        },
+        "SentenceAnalysis": {
+            "required": [
+                "sentence_id",
+                "text",
+                "input_from",
+                "input_to",
+                "tone_categories"
+            ],
+            "properties": {
+                "sentence_id": {
+                    "type": "integer",
+                    "description": "The unique identifier of a sentence of the input content. The first sentence has ID 0, and the ID of each subsequent sentence is incremented by one."
+                },
+                "text": {
+                    "type": "string",
+                    "description": "The text of the input sentence."
+                },
+                "input_from": {
+                    "type": "integer",
+                    "description": "The offset of the first character of the sentence in the overall input content."
+                },
+                "input_to": {
+                    "type": "integer",
+                    "description": "The offset of the last character of the sentence in the overall input content."
+                },
+                "tone_categories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ToneCategory"
+                    },
+                    "description": "An array of `ToneCategory` objects that provides the results for the tone analysis of the sentence. The service returns results only for the tones specified with the `tones` parameter of the request."
+                }
+            }
+        },
+        "ToneCategory": {
+            "required": [
+                "tones",
+                "category_id",
+                "category_name"
+            ],
+            "properties": {
+                "tones": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ToneScore"
+                    },
+                    "description": "An array of `ToneScore` objects that provides the results for the tones of the category."
+                },
+                "category_id": {
+                    "type": "string",
+                    "description": "The unique, non-localized identifier of the category for the results. The service can return results for the following category IDs: `emotion_tone`, `language_tone`, and `social_tone`."
+                },
+                "category_name": {
+                    "type": "string",
+                    "description": "The user-visible, localized name of the category."
+                }
+            }
+        },
+        "ToneScore": {
+            "required": [
+                "score",
+                "tone_id",
+                "tone_name"
+            ],
+            "properties": {
+                "score": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The score for the tone in the range of 0 to 1. A score less than 0.5 indicates that the tone is unlikely to be perceived in the content; a score greater than 0.75 indicates a high likelihood that the tone is perceived."
+                },
+                "tone_id": {
+                    "type": "string",
+                    "description": "The unique, non-localized identifier of the tone for the results. The service can return results for the following tone IDs of the different categories:\n* For the `emotion` category: `anger`, `disgust`, `fear`, `joy`, and `sadness`\n* For the `language` category: `analytical`, `confident`, and `tentative`\n* For the `social` category: `openness_big5`, `conscientiousness_big5`, `extraversion_big5`, `agreeableness_big5`, and `emotional_range_big5` \n\nThe service returns scores for all tones of a category, regardless of their values."
+                },
+                "tone_name": {
+                    "type": "string",
+                    "description": "The user-visible, localized name of the tone."
+                }
+            }
+        },
+        "UtteranceAnalyses": {
+            "required": [
+                "utterances_tone"
+            ],
+            "properties": {
+                "utterances_tone": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/UtteranceAnalysis"
+                    },
+                    "description": "An array of `UtteranceAnalysis` objects that provides the results for each utterance of the input."
+                }
+            }
+        },
+        "UtteranceAnalysis": {
+            "required": [
+                "utterance_id",
+                "utterance_text",
+                "tones"
+            ],
+            "properties": {
+                "utterance_id": {
+                    "type": "string",
+                    "description": "The unique identifier of the utterance. The first utterance has ID 0, and the ID of each subsequent utterance is incremented by one."
+                },
+                "utterance_text": {
+                    "type": "string",
+                    "description": "The text of the utterance."
+                },
+                "tones": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ToneChatScore"
+                    },
+                    "description": "An array of `ToneChatScore` objects that provides results for the most prevalent tones of the utterance. The array includes results for any tone whose score is at least 0.5. The array is empty if no tone has a score that meets this threshold."
+                }
+            }
+        },
+        "ToneChatScore": {
+            "required": [
+                "score",
+                "tone_id",
+                "tone_name"
+            ],
+            "properties": {
+                "score": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The score for the tone in the range of 0.5 to 1. A score greater than 0.75 indicates a high likelihood that the tone is perceived in the utterance."
+                },
+                "tone_id": {
+                    "type": "string",
+                    "description": "The unique, non-localized identifier of the tone for the results. The service can return results for the following tone IDs: `sad`, `frustrated`, `satisfied`, `excited`, `polite`, `impolite`, and `sympathetic`. The service returns results only for tones whose scores meet a minimum threshold of 0.5."
+                },
+                "tone_name": {
+                    "type": "string",
+                    "description": "The user-visible, localized name of the tone."
+                }
+            }
+        },
+        "ErrorModel": {
+            "required": [
+                "code",
+                "error"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "description": "The HTTP status code."
+                },
+                "sub_code": {
+                    "type": "string",
+                    "description": "A service-specific error code."
+                },
+                "error": {
+                    "type": "string",
+                    "description": "A description of the error."
+                },
+                "help": {
+                    "type": "string",
+                    "description": "A URL to documentation explaining the cause and possibly solutions for the error."
+                }
+            }
+        }
+    }
+}

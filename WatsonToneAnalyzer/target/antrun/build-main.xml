@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <touch file="/Users/yathendraprasad/Desktop/MFP_Project/MFPDev_ExtensionAdapters/mfp-extension-adapters/WatsonToneAnalyzer/mfp-changelog.log"/>
+  <move file="/Users/yathendraprasad/Desktop/MFP_Project/MFPDev_ExtensionAdapters/mfp-extension-adapters/WatsonToneAnalyzer/mfp-changelog.log" tofile="/Users/yathendraprasad/Desktop/MFP_Project/MFPDev_ExtensionAdapters/mfp-extension-adapters/WatsonToneAnalyzer/target/mfp-changelog.log"/>
+</target>
+</project>

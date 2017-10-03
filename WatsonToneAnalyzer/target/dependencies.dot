@@ -1,0 +1,4 @@
+digraph "mfp.server.adapter-extensions:WatsonToneAnalyzer:adapter:8.0.2017062210" { 
+	"mfp.server.adapter-extensions:WatsonToneAnalyzer:adapter:8.0.2017062210" -> "com.ibm.mfp:adapter-maven-api:jar:8.0.0:provided" ; 
+	"mfp.server.adapter-extensions:WatsonToneAnalyzer:adapter:8.0.2017062210" -> "com.ibm.mfp:mfp-security-checks-base:jar:8.0.0:compile" ; 
+ } 
