@@ -1,6 +1,6 @@
 # mfp-extension-adapters
 
-1) MFP Extension Adapters for Watson Congnitive Services such as Watson Conversation, Watson Natural Language Understanding and Watson Discovery. Using these MobleFirst Platform Adapters customer can quickly build a cognitive mobile apps and leverage IBM MobileFirst Platform capabilities
+1) MFP Extension Adapters for Watson Congnitive Services such as Watson Conversation,Watson Tone Analyzer, Watson Language Understanding, Watson Natural Language Understanding and Watson Discovery. Using these MobleFirst Platform Adapters customer can quickly build a cognitive mobile apps and leverage IBM MobileFirst Platform capabilities
 
 2) MFP Extension Adapter for OpenWhisk - Customer can quickly build a serverless mobile application using OpenWhisk Adapter
 
