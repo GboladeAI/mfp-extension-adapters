@@ -1,0 +1,3999 @@
+{
+  "swagger": "2.0",
+  "basePath": "/conversation/api",
+  "info": {
+    "version": "1.0",
+    "title": "Conversation",
+    "description": "The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated dialog tools to create conversation flows between your apps and your users.",
+    "x-vcap-service-name": "conversation"
+  },
+  "securityDefinitions":{
+"basicAuth": {
+   "type": "basic",
+   "description": "HTTP Basic Authentication."
+ }
+},
+"security":[
+ {
+   "basicAuth": []
+ }
+],
+"externalDocs": {
+"description": "For more information about this service, see the documentation:",
+"url": "http://www.ibm.com/watson/developercloud/doc/conversation"
+},
+"host": "gateway-fra.watsonplatform.net",
+"schemes": [
+"https"
+],
+  "tags": [
+    {
+      "name": "workspaces"
+    },
+    {
+      "name": "message"
+    }
+  ],
+  "paths": {
+    "/v1/workspaces/{workspace_id}/counterexamples": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "listCounterexamples",
+        "summary": "List counterexamples",
+        "description": "List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.",
+        "tags": [
+          "counterexamples"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PageLimitQueryParam"
+          },
+          {
+            "$ref": "#/parameters/IncludeCountQueryParam"
+          },
+          {
+            "$ref": "#/parameters/SortQueryParam"
+          },
+          {
+            "$ref": "#/parameters/CursorQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CounterexampleCollection"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "counterexamples": [
+                  {
+                    "text": "I want financial advice today.",
+                    "created": "2016-07-11T16:39:01.774Z",
+                    "updated": "2015-12-07T18:53:59.153Z"
+                  },
+                  {
+                    "text": "What are you wearing today",
+                    "created": "2016-07-11T16:39:01.774Z",
+                    "updated": "2015-12-07T18:53:59.153Z"
+                  }
+                ],
+                "pagination": {
+                  "refresh_url": "/v1/workspaces/pizza_app-e0f3/counterexamples?version=2017-12-18&page_limit=2",
+                  "next_url": "/v1/workspaces/pizza_app-e0f3/counterexamples?cursor=base64=&version=2017-12-18&page_limit=2"
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCounterexample",
+        "summary": "Create counterexample",
+        "description": "Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.",
+        "tags": [
+          "counterexamples"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "An object defining the content of the new user input counterexample.",
+            "schema": {
+              "$ref": "#/definitions/CreateCounterexample"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Counterexample"
+            },
+            "description": "Successful request."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/counterexamples/{text}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "in": "path",
+          "name": "text",
+          "required": true,
+          "type": "string",
+          "description": "The text of a user input counterexample (for example, `What are you wearing?`)."
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "getCounterexample",
+        "summary": "Get counterexample",
+        "description": "Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.",
+        "tags": [
+          "counterexamples"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Counterexample"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "text": "What are you wearing?",
+                "created": "2016-07-11T23:53:59.153Z",
+                "updated": "2016-12-07T18:53:59.153Z"
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteCounterexample",
+        "summary": "Delete counterexample",
+        "description": "Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.",
+        "tags": [
+          "counterexamples"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {}
+            },
+            "description": "Successful request."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "post": {
+        "operationId": "updateCounterexample",
+        "summary": "Update counterexample",
+        "description": "Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.",
+        "tags": [
+          "counterexamples"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "An object defining the new text for the counterexample.",
+            "schema": {
+              "$ref": "#/definitions/UpdateCounterexample"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Counterexample"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "text": "What are you wearing?",
+                "created": "2016-07-11T23:53:59.153Z",
+                "updated": "2015-12-07T18:53:59.153Z"
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/entities": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "listEntities",
+        "summary": "List entities",
+        "description": "List the entities for a workspace.",
+        "tags": [
+          "entities"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ExportQueryParam"
+          },
+          {
+            "$ref": "#/parameters/PageLimitQueryParam"
+          },
+          {
+            "$ref": "#/parameters/IncludeCountQueryParam"
+          },
+          {
+            "$ref": "#/parameters/SortQueryParam"
+          },
+          {
+            "$ref": "#/parameters/CursorQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/EntityCollection"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "entities": [
+                  {
+                    "entity": "pizza_toppings",
+                    "description": "Tasty pizza toppings",
+                    "created": "2015-12-06T04:32:20.000Z",
+                    "updated": "2015-12-07T18:53:59.153Z",
+                    "metadata": {
+                      "property": "value"
+                    }
+                  }
+                ],
+                "pagination": {
+                  "refresh_url": "/v1/workspaces/pizza_app-e0f3/entities?version=2017-12-18&filter=name:pizza&include_count=true&page_limit=1",
+                  "next_url": "/v1/workspaces/pizza_app-e0f3/entities?cursor=base64=&version=2017-12-18&filter=name:pizza&page_limit=1",
+                  "total": 1,
+                  "matched": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "post": {
+        "operationId": "createEntity",
+        "summary": "Create entity",
+        "description": "Create a new entity.",
+        "tags": [
+          "entities"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "A CreateEntity object defining the content of the new entity.",
+            "schema": {
+              "$ref": "#/definitions/CreateEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Entity"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "entity": "pizza_toppings",
+                "description": "Tasty pizza toppings",
+                "created": "2015-12-06T04:32:20.000Z",
+                "updated": "2015-12-07T18:53:59.153Z",
+                "metadata": {
+                  "property": "value"
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/entities/{entity}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/EntityPathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "getEntity",
+        "summary": "Get entity",
+        "description": "Get information about an entity, optionally including all entity content.",
+        "tags": [
+          "entities"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ExportQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/EntityExport"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "entity": "pizza_toppings",
+                "description": "Tasty pizza toppings",
+                "created": "2015-12-06T04:32:20.000Z",
+                "updated": "2015-12-07T18:53:59.153Z",
+                "metadata": {
+                  "property": "value"
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "post": {
+        "operationId": "updateEntity",
+        "summary": "Update entity",
+        "description": "Update an existing entity with new or modified data.",
+        "tags": [
+          "entities"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "An UpdateEntity object defining the updated content of the entity.",
+            "schema": {
+              "$ref": "#/definitions/UpdateEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Entity"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "entity": "pizza_toppings",
+                "description": "Tasty pizza toppings",
+                "created": "2015-12-06T04:32:20.000Z",
+                "updated": "2015-12-07T18:53:59.153Z",
+                "metadata": {
+                  "property": "value"
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteEntity",
+        "summary": "Delete entity",
+        "description": "Delete an entity from a workspace.",
+        "tags": [
+          "entities"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {}
+            },
+            "description": "Successful request."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/entities/{entity}/values": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/EntityPathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "listValues",
+        "summary": "List entity values",
+        "description": "List the values for an entity.",
+        "tags": [
+          "values"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ExportQueryParam"
+          },
+          {
+            "$ref": "#/parameters/PageLimitQueryParam"
+          },
+          {
+            "$ref": "#/parameters/IncludeCountQueryParam"
+          },
+          {
+            "$ref": "#/parameters/SortQueryParam"
+          },
+          {
+            "$ref": "#/parameters/CursorQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ValueCollection"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "values": [
+                  {
+                    "value": "BBQ sauce",
+                    "metadata": {
+                      "code": 1422
+                    },
+                    "created": "2015-12-06T23:53:59.153Z",
+                    "updated": "2015-12-07T18:53:59.153Z"
+                  }
+                ],
+                "pagination": {
+                  "refresh_url": "/v1/workspaces/pizza_app-e0f3/entities/sauce/values?version=2017-12-18&filter=name:pizza&include_count=true&page_limit=1",
+                  "next_url": "/v1/workspaces/pizza_app-e0f3/sauce/values?cursor=base64=&version=2017-12-18&filter=name:pizza&page_limit=1",
+                  "total": 1,
+                  "matched": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "post": {
+        "operationId": "createValue",
+        "summary": "Add entity value",
+        "description": "Create a new value for an entity.",
+        "tags": [
+          "values"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "A CreateValue object defining the content of the new value for the entity.",
+            "schema": {
+              "$ref": "#/definitions/CreateValue"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Value"
+            },
+            "description": "Successful request."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/entities/{entity}/values/{value}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/EntityPathParam"
+        },
+        {
+          "$ref": "#/parameters/ValuePathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "getValue",
+        "summary": "Get entity value",
+        "description": "Get information about an entity value.",
+        "tags": [
+          "values"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ExportQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ValueExport"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "value": "BBQ sauce",
+                "metadata": {
+                  "code": 1422
+                },
+                "created": "2015-12-06T23:53:59.153Z",
+                "updated": "2015-12-07T18:53:59.153Z"
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "post": {
+        "operationId": "updateValue",
+        "summary": "Update entity value",
+        "description": "Update the content of a value for an entity.",
+        "tags": [
+          "values"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "An UpdateValue object defining the new content for value for the entity.",
+            "schema": {
+              "$ref": "#/definitions/UpdateValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Value"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "value": "BBQ sauce",
+                "metadata": {
+                  "code": 1422
+                },
+                "created": "2015-12-06T23:53:59.153Z"
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteValue",
+        "summary": "Delete entity value",
+        "description": "Delete a value for an entity.",
+        "tags": [
+          "values"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {}
+            },
+            "description": "Successful request."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/entities/{entity}/values/{value}/synonyms": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/EntityPathParam"
+        },
+        {
+          "$ref": "#/parameters/ValuePathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "listSynonyms",
+        "summary": "List entity value synonyms",
+        "description": "List the synonyms for an entity value.",
+        "tags": [
+          "synonyms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PageLimitQueryParam"
+          },
+          {
+            "$ref": "#/parameters/IncludeCountQueryParam"
+          },
+          {
+            "$ref": "#/parameters/SortQueryParam"
+          },
+          {
+            "$ref": "#/parameters/CursorQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/SynonymCollection"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "synonyms": [
+                  {
+                    "synonym": "BBQ sauce",
+                    "created": "2015-12-06T23:53:59.153Z",
+                    "updated": "2015-12-07T18:53:59.153Z"
+                  },
+                  {
+                    "synonym": "barbecue",
+                    "created": "2015-12-06T23:53:59.153Z",
+                    "updated": "2015-12-07T18:53:59.153Z"
+                  }
+                ],
+                "pagination": {
+                  "refresh_url": "/v1/workspaces/pizza_app-e0f3/entities/sauce/values/types/synonyms?version=2017-12-18&filter=name:b&include_count=true&page_limit=2",
+                  "next_url": "/v1/workspaces/pizza_app-e0f3/entities/sauce/values/types/synonyms?cursor=base64=&version=2017-12-18&filter=name:b&page_limit=2",
+                  "total": 8,
+                  "matched": 2
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSynonym",
+        "summary": "Add entity value synonym",
+        "description": "Add a new synonym to an entity value.",
+        "tags": [
+          "synonyms"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "A CreateSynonym object defining the new synonym for the entity value.",
+            "schema": {
+              "$ref": "#/definitions/CreateSynonym"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Synonym"
+            },
+            "description": "Successful request."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/entities/{entity}/values/{value}/synonyms/{synonym}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/EntityPathParam"
+        },
+        {
+          "$ref": "#/parameters/ValuePathParam"
+        },
+        {
+          "in": "path",
+          "name": "synonym",
+          "required": true,
+          "type": "string",
+          "description": "The text of the synonym."
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "getSynonym",
+        "summary": "Get entity value synonym",
+        "description": "Get information about a synonym for an entity value.",
+        "tags": [
+          "synonyms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Synonym"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "synonym": "barbecue",
+                "created": "2015-12-06T23:53:59.153Z",
+                "updated": "2015-12-07T18:53:59.153Z"
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "post": {
+        "operationId": "updateSynonym",
+        "summary": "Update entity value synonym",
+        "description": "Update the information about a synonym for an entity value.",
+        "tags": [
+          "synonyms"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "An UpdateSynonym object defining the new information for an entity value synonym.",
+            "schema": {
+              "$ref": "#/definitions/UpdateSynonym"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Synonym"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "synonym": "barbecue",
+                "created": "2015-12-06T23:53:59.153Z",
+                "updated": "2015-12-07T18:53:59.153Z"
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteSynonym",
+        "summary": "Delete entity value synonym",
+        "description": "Delete a synonym for an entity value.",
+        "tags": [
+          "synonyms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {}
+            },
+            "description": "Successful request."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/intents": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "listIntents",
+        "summary": "List intents",
+        "description": "List the intents for a workspace.",
+        "tags": [
+          "intents"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ExportQueryParam"
+          },
+          {
+            "$ref": "#/parameters/PageLimitQueryParam"
+          },
+          {
+            "$ref": "#/parameters/IncludeCountQueryParam"
+          },
+          {
+            "$ref": "#/parameters/SortQueryParam"
+          },
+          {
+            "$ref": "#/parameters/CursorQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/IntentCollection"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "intents": [
+                  {
+                    "intent": "pizza_order",
+                    "created": "2015-12-06T23:53:59.153Z",
+                    "updated": "2015-12-07T18:53:59.153Z",
+                    "description": "User wants to start a new pizza order"
+                  }
+                ],
+                "pagination": {
+                  "refresh_url": "/v1/workspaces/pizza_app-e0f3/intents?version=2017-12-18&page_limit=1",
+                  "next_url": "/v1/workspaces/pizza_app-e0f3/intents?cursor=base64=&version=2017-12-18&page_limit=1"
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "post": {
+        "operationId": "createIntent",
+        "summary": "Create intent",
+        "description": "Create a new intent.",
+        "tags": [
+          "intents"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "A CreateIntent object defining the content of the new intent.",
+            "schema": {
+              "$ref": "#/definitions/CreateIntent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Intent"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "intent": "pizza_order",
+                "created": "2015-12-06T23:53:59.153Z",
+                "updated": "2015-12-07T18:53:59.153Z",
+                "description": "User wants to start a new pizza order"
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/intents/{intent}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/IntentPathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "getIntent",
+        "summary": "Get intent",
+        "description": "Get information about an intent, optionally including all intent content.",
+        "tags": [
+          "intents"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ExportQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/IntentExport"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "intent": "pizza_order",
+                "created": "2015-12-06T23:53:59.153Z",
+                "updated": "2015-12-07T18:53:59.153Z",
+                "description": "User wants to start a new pizza order"
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteIntent",
+        "summary": "Delete intent",
+        "description": "Delete an intent from a workspace.",
+        "tags": [
+          "intents"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {}
+            },
+            "description": "Successful request."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "post": {
+        "operationId": "updateIntent",
+        "summary": "Update intent",
+        "description": "Update an existing intent with new or modified data. You must provide data defining the content of the updated intent.",
+        "tags": [
+          "intents"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "An UpdateIntent object defining the updated content of the intent.",
+            "schema": {
+              "$ref": "#/definitions/UpdateIntent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Intent"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "intent": "pizza_order",
+                "created": "2015-12-06T23:53:59.153Z",
+                "updated": "2015-12-07T18:53:59.153Z",
+                "description": "User wants to start a new pizza order"
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/intents/{intent}/examples": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/IntentPathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "listExamples",
+        "summary": "List user input examples",
+        "description": "List the user input examples for an intent.",
+        "tags": [
+          "examples"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PageLimitQueryParam"
+          },
+          {
+            "$ref": "#/parameters/IncludeCountQueryParam"
+          },
+          {
+            "$ref": "#/parameters/SortQueryParam"
+          },
+          {
+            "$ref": "#/parameters/CursorQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ExampleCollection"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "examples": [
+                  {
+                    "text": "Can I order a pizza?",
+                    "created": "2016-07-11T16:39:01.774Z",
+                    "updated": "2015-12-07T18:53:59.153Z"
+                  },
+                  {
+                    "text": "Gimme a pizza with pepperoni",
+                    "created": "2016-07-11T16:39:01.774Z",
+                    "updated": "2015-12-07T18:53:59.153Z"
+                  }
+                ],
+                "pagination": {
+                  "refresh_url": "/v1/workspaces/pizza_app-e0f3/intents/order/examples?version=2017-12-18&page_limit=2",
+                  "next_url": "/v1/workspaces/pizza_app-e0f3/intents/order/examples?cursor=base64=&version=2017-12-18&page_limit=2"
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "post": {
+        "operationId": "createExample",
+        "summary": "Create user input example",
+        "description": "Add a new user input example to an intent.",
+        "tags": [
+          "examples"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "A CreateExample object defining the content of the new user input example.",
+            "schema": {
+              "$ref": "#/definitions/CreateExample"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Example"
+            },
+            "description": "Successful request."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/intents/{intent}/examples/{text}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/IntentPathParam"
+        },
+        {
+          "in": "path",
+          "name": "text",
+          "required": true,
+          "type": "string",
+          "description": "The text of the user input example."
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "getExample",
+        "summary": "Get user input example",
+        "description": "Get information about a user input example.",
+        "tags": [
+          "examples"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Example"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "text": "Gimme a pizza with pepperoni",
+                "created": "2016-07-11T23:53:59.153Z",
+                "updated": "2016-12-07T18:53:59.153Z"
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteExample",
+        "summary": "Delete user input example",
+        "description": "Delete a user input example from an intent.",
+        "tags": [
+          "examples"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {}
+            },
+            "description": "Successful request."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request"
+          }
+        }
+      },
+      "post": {
+        "operationId": "updateExample",
+        "summary": "Update user input example",
+        "description": "Update the text of a user input example.",
+        "tags": [
+          "examples"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "An UpdateExample object defining the new text for the user input example.",
+            "schema": {
+              "$ref": "#/definitions/UpdateExample"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Example"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "text": "Gimme a pizza with pepperoni",
+                "created": "2016-07-11T23:53:59.153Z",
+                "updated": "2015-12-07T18:53:59.153Z"
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/dialog_nodes": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "listDialogNodes",
+        "summary": "List dialog nodes",
+        "description": "List the dialog nodes in the workspace.",
+        "tags": [
+          "dialog_nodes"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PageLimitQueryParam"
+          },
+          {
+            "$ref": "#/parameters/IncludeCountQueryParam"
+          },
+          {
+            "$ref": "#/parameters/SortQueryParam"
+          },
+          {
+            "$ref": "#/parameters/CursorQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DialogNodeCollection"
+            },
+            "description": "Successful request",
+            "examples": {
+              "application/json": {
+                "dialog_nodes": [
+                  {
+                    "dialog_node": "conversation-start",
+                    "description": "",
+                    "title": "Begin Dialog",
+                    "created": "2015-12-06T23:53:59.153Z",
+                    "conditions": "!state.conversation_id",
+                    "parent": null,
+                    "previous_sibling": null,
+                    "next_step": null,
+                    "output": {
+                      "text": "Hi. How can I help you?"
+                    },
+                    "metadata": {},
+                    "context": {}
+                  },
+                  {
+                    "dialog_node": "location-atm",
+                    "description": "",
+                    "title": "ATM Location",
+                    "created": "2015-12-06T23:53:59.153Z",
+                    "conditions": "intent == location && entities.amenity == 'ATM'",
+                    "parent": "conversation-start",
+                    "previous_sibling": null,
+                    "next_step": null,
+                    "output": {
+                      "text": "The ATM is located by the elevators."
+                    },
+                    "metadata": {},
+                    "context": {}
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createDialogNode",
+        "summary": "Create dialog node",
+        "description": "Create a dialog node.",
+        "tags": [
+          "dialog_nodes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "A CreateDialogNode object defining the content of the new dialog node.",
+            "schema": {
+              "$ref": "#/definitions/CreateDialogNode"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/DialogNode"
+            },
+            "description": "Successful request",
+            "examples": {
+              "application/json": {
+                "dialog_node": "location-atm",
+                "description": "",
+                "title": "ATM Location",
+                "created": "2015-12-06T23:53:59.153Z",
+                "conditions": "intent == location && entities.amenity == 'ATM'",
+                "parent": "conversation-start",
+                "previous_sibling": null,
+                "next_step": null,
+                "output": {
+                  "text": "The ATM is located by the elevators."
+                },
+                "metadata": {},
+                "context": {}
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request"
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/dialog_nodes/{dialog_node}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/DialogNodePathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "getDialogNode",
+        "summary": "Get dialog node",
+        "description": "Get information about a dialog node.",
+        "tags": [
+          "dialog_nodes"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DialogNode"
+            },
+            "description": "Successful request",
+            "examples": {
+              "application/json": {
+                "dialog_node": "location-atm",
+                "description": "",
+                "title": "ATM Location",
+                "created": "2015-12-06T23:53:59.153Z",
+                "conditions": "intent == location && entities.amenity == 'ATM'",
+                "parent": "conversation-start",
+                "previous_sibling": null,
+                "next_step": null,
+                "output": {
+                  "text": "The ATM is located by the elevators."
+                },
+                "metadata": {},
+                "context": {}
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request"
+          }
+        }
+      },
+      "post": {
+        "operationId": "UpdateDialogNode",
+        "summary": "Update dialog node",
+        "description": "Update information for a dialog node.",
+        "tags": [
+          "dialog_nodes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "An UpdateDialogNode object defining the new contents of the dialog node.",
+            "schema": {
+              "$ref": "#/definitions/UpdateDialogNode"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DialogNode"
+            },
+            "description": "Successful request",
+            "examples": {
+              "application/json": {
+                "dialog_node": "location-atm",
+                "description": "",
+                "title": "ATM Location",
+                "created": "2015-12-06T23:53:59.153Z",
+                "conditions": "intent == location && entities.amenity == 'ATM'",
+                "parent": "conversation-start",
+                "previous_sibling": null,
+                "next_step": null,
+                "output": {
+                  "text": "The ATM is located by the elevators."
+                },
+                "context": {}
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteDialogNode",
+        "summary": "Delete dialog node",
+        "description": "Delete a dialog node from the workspace.",
+        "tags": [
+          "dialog_nodes"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "title": "EmptyObject",
+              "properties": {}
+            },
+            "description": "Successful request"
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request"
+          }
+        }
+      }
+    },
+    "/v1/workspaces": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "post": {
+        "operationId": "createWorkspace",
+        "summary": "Create workspace",
+        "description": "Create a workspace based on component objects. You must provide workspace components defining the content of the new workspace.",
+        "tags": [
+          "workspaces"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Valid data defining the content of the new workspace.",
+            "schema": {
+              "$ref": "#/definitions/CreateWorkspace"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "name": "Pizza app",
+                "created": "2015-12-06T23:53:59.153Z",
+                "language": "en",
+                "metadata": {},
+                "updated": "2015-12-06T23:53:59.153Z",
+                "description": "Pizza app",
+                "workspace_id": "pizza_app-e0f3",
+                "learning_opt_out": false
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "get": {
+        "operationId": "listWorkspaces",
+        "summary": "List workspaces",
+        "description": "List the workspaces associated with a Conversation service instance.",
+        "tags": [
+          "workspaces"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PageLimitQueryParam"
+          },
+          {
+            "$ref": "#/parameters/IncludeCountQueryParam"
+          },
+          {
+            "$ref": "#/parameters/SortQueryParam"
+          },
+          {
+            "$ref": "#/parameters/CursorQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/WorkspaceCollection"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "workspaces": [
+                  {
+                    "name": "Pizza app",
+                    "created": "2015-12-06T23:53:59.153Z",
+                    "language": "en",
+                    "metadata": {},
+                    "updated": "2015-12-06T23:53:59.153Z",
+                    "description": "Pizza app",
+                    "workspace_id": "pizza_app-e0f3",
+                    "learning_opt_out": false
+                  }
+                ],
+                "pagination": {
+                  "refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1",
+                  "next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1"
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "getWorkspace",
+        "summary": "Get information about a workspace",
+        "description": "Get information about a workspace, optionally including all workspace content.",
+        "tags": [
+          "workspaces"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ExportQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/WorkspaceExport"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "name": "Pizza app",
+                "created": "2015-12-06T23:53:59.153Z",
+                "language": "en",
+                "metadata": {},
+                "updated": "2015-12-06T23:53:59.153Z",
+                "description": "Pizza app",
+                "status": "Available",
+                "workspace_id": "pizza_app-e0f3",
+                "learning_opt_out": false
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "post": {
+        "operationId": "updateWorkspace",
+        "summary": "Update workspace",
+        "description": "Update an existing workspace with new or modified data. You must provide component objects defining the content of the updated workspace.",
+        "tags": [
+          "workspaces"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Valid data defining the new workspace content. Any elements included in the new data will completely replace the existing elements, including all subelements. Previously existing subelements are not retained unless they are included in the new data.",
+            "schema": {
+              "$ref": "#/definitions/UpdateWorkspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "name": "Pizza app",
+                "created": "2015-12-06T23:53:59.153Z",
+                "language": "en",
+                "metadata": {},
+                "updated": "2015-12-06T23:53:59.153Z",
+                "description": "Pizza app",
+                "workspace_id": "pizza_app-e0f3",
+                "learning_opt_out": false
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteWorkspace",
+        "summary": "Delete workspace",
+        "description": "Delete a workspace from the service instance.",
+        "tags": [
+          "workspaces"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {}
+            },
+            "description": "Successful request."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/message": {
+      "post": {
+        "operationId": "message",
+        "summary": "Get a response to a user's input",
+        "tags": [
+          "message"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspace_id",
+            "required": true,
+            "type": "string",
+            "default": "0a0c06c1-8e31-4655-9067-58fcac5134fc",
+            "description": "Unique identifier of the workspace."
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "required": true,
+            "default": "2017-05-26",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "type": "string",
+            "description": "Release date of the API version in YYYY-MM-DD format."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "The user's input, with optional intents, entities, and other properties from the response.",
+            "schema": {
+              "$ref": "#/definitions/MessageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            },
+            "examples": {
+              "application/json": {
+                "input": {
+                  "text": "Turn on the lights"
+                },
+                "alternate_intents": true,
+                "context": {
+                  "conversation_id": "1b7b67c0-90ed-45dc-8508-9488bc483d5b",
+                  "system": {
+                    "dialog_stack": [
+                      {
+                        "dialog_node": "root"
+                      }
+                    ],
+                    "dialog_turn_counter": 2,
+                    "dialog_request_counter": 2
+                  }
+                },
+                "entities": [
+                  {
+                    "entity": "appliance",
+                    "location": [
+                      12,
+                      18
+                    ],
+                    "value": "light",
+                    "confidence": 1
+                  }
+                ],
+                "intents": [
+                  {
+                    "intent": "turn_on",
+                    "confidence": 0.99
+                  },
+                  {
+                    "intent": "turn_up",
+                    "confidence": 0.2
+                  },
+                  {
+                    "intent": "out_of_scope",
+                    "confidence": 0.2
+                  }
+                ],
+                "output": {
+                  "log_messages": [
+                    {
+                      "level": "warn",
+                      "msg": "No dialog node matched for the input at a root level!"
+                    }
+                  ],
+                  "text": [
+                    "Ok. Turning on the light"
+                  ],
+                  "nodes_visited": [
+                    "node_1_1467232431348",
+                    "node_2_1467232480480",
+                    "node_4_1467232602708"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/logs": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/WorkspacePathParam"
+        },
+        {
+          "$ref": "#/parameters/VersionQueryParam"
+        }
+      ],
+      "get": {
+        "operationId": "listLogs",
+        "summary": "List log events",
+        "tags": [
+          "logs"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SortQueryParam"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "required": false,
+            "type": "string",
+            "description": "A cacheable parameter that limits the results to those matching the specified filter. For more information, see the [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax)."
+          },
+          {
+            "$ref": "#/parameters/PageLimitQueryParam"
+          },
+          {
+            "$ref": "#/parameters/CursorQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/LogCollection"
+            },
+            "description": "Successful request.",
+            "examples": {
+              "application/json": {
+                "logs": [
+                  {
+                    "request": {
+                      "input": {
+                        "text": "Can you turn off the AC"
+                      },
+                      "context": {}
+                    },
+                    "response": {
+                      "input": {
+                        "text": "Can you turn off the AC"
+                      },
+                      "context": {
+                        "conversation_id": "f2c7e362-4cc8-4761-8b0f-9ccd70c63bca",
+                        "system": {
+                          "dialog_stack": [
+                            "root"
+                          ],
+                          "dialog_turn_counter": 1,
+                          "dialog_request_counter": 1
+                        },
+                        "defaultCounter": 0
+                      },
+                      "entities": [],
+                      "intents": [
+                        {
+                          "intent": "turn_off",
+                          "confidence": 0.9332477126694649
+                        }
+                      ],
+                      "output": {
+                        "log_messages": [],
+                        "text": [
+                          "Hi. It looks like a nice drive today. What would you like me to do?"
+                        ],
+                        "nodes_visited": [
+                          "node_1_1467221909631"
+                        ]
+                      }
+                    },
+                    "request_timestamp": "2016-07-16T09:22:38.960Z",
+                    "response_timestamp": "2016-07-16T09:22:39.011Z",
+                    "log_id": "e70d6c12-582d-47a8-a6a2-845120a1f232"
+                  }
+                ],
+                "pagination": {
+                  "next_url": "/v1/workspaces/15fb0e8a-463d-4fec-86aa-a737d9c38a32/logs?cursor=dOfVSuh6fBpDuOxEL9m1S7JKDV7KLuBmRR+lQG1s1i/rVnBZ0ZBVCuy53ruHgPImC31gQv5prUsJ77e0Mj+6sGu/yfusHYF5&version=2016-07-11&filter=response.top_intent:turn_off&page_limit=1",
+                  "matched": 215
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Invalid request."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "description": "Internal server error."
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CursorQueryParam": {
+      "in": "query",
+      "name": "cursor",
+      "required": false,
+      "type": "string",
+      "description": "A token identifying the last value from the previous page of results."
+    },
+    "DialogNodePathParam": {
+      "in": "path",
+      "name": "dialog_node",
+      "required": true,
+      "type": "string",
+      "description": "The dialog node ID (for example, `get_order`)."
+    },
+    "EntityPathParam": {
+      "in": "path",
+      "name": "entity",
+      "required": true,
+      "type": "string",
+      "description": "The name of the entity."
+    },
+    "ExportQueryParam": {
+      "in": "query",
+      "name": "export",
+      "required": false,
+      "default": false,
+      "type": "boolean",
+      "description": "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`."
+    },
+    "IncludeCountQueryParam": {
+      "in": "query",
+      "name": "include_count",
+      "required": false,
+      "default": false,
+      "type": "boolean",
+      "description": "Whether to include information about the number of records returned."
+    },
+    "IntentPathParam": {
+      "in": "path",
+      "name": "intent",
+      "required": true,
+      "type": "string",
+      "description": "The intent name (for example, `pizza_order`)."
+    },
+    "PageLimitQueryParam": {
+      "in": "query",
+      "name": "page_limit",
+      "required": false,
+      "type": "integer",
+      "description": "The number of records to return in each page of results. The default page limit is 100."
+    },
+    "SortQueryParam": {
+      "in": "query",
+      "name": "sort",
+      "required": false,
+      "type": "string",
+      "description": "Sorts the response according to the value of the specified property, in ascending or descending order."
+    },
+    "ValuePathParam": {
+      "in": "path",
+      "name": "value",
+      "required": true,
+      "type": "string",
+      "description": "The text of the entity value."
+    },
+    "VersionQueryParam": {
+      "in": "query",
+      "name": "version",
+      "required": true,
+      "default": "2017-05-26",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "type": "string",
+      "description": "Release date of the API version in YYYY-MM-DD format."
+    },
+    "WorkspacePathParam": {
+      "in": "path",
+      "name": "workspace_id",
+      "required": true,
+      "default": "0a0c06c1-8e31-4655-9067-58fcac5134fc",
+      "type": "string",
+      "description": "The workspace ID."
+    }
+  },
+  "definitions": {
+    "BaseCounterexample": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the example to be marked as irrelevant input."
+        }
+      }
+    },
+    "BaseDialogNode": {
+      "properties": {
+        "dialog_node": {
+          "type": "string",
+          "description": "The dialog node ID."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the dialog node."
+        },
+        "conditions": {
+          "type": "string",
+          "description": "The condition that will trigger the dialog node."
+        },
+        "parent": {
+          "type": "string",
+          "description": "The ID of the parent dialog node (if any)."
+        },
+        "previous_sibling": {
+          "type": "string",
+          "description": "The previous dialog node."
+        },
+        "output": {
+          "type": "object",
+          "description": "The output of the dialog node."
+        },
+        "context": {
+          "type": "object",
+          "description": "The context for the dialog node."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata for the dialog node."
+        },
+        "next_step": {
+          "$ref": "#/definitions/DialogNodeNextStep"
+        },
+        "title": {
+          "type": "string",
+          "description": "The alias used to identify the dialog node."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "event_handler",
+            "frame",
+            "slot",
+            "response_condition"
+          ],
+          "description": "How the node is processed."
+        },
+        "event_name": {
+          "type": "string",
+          "enum": [
+            "focus",
+            "input",
+            "filled",
+            "validate",
+            "filled_multiple",
+            "generic",
+            "nomatch",
+            "nomatch_responses_depleted"
+          ],
+          "description": "How an `event_handler` node is processed."
+        },
+        "variable": {
+          "type": "string",
+          "description": "The location in the dialog context where output is stored."
+        }
+      },
+      "required": [
+        "dialog_node"
+      ]
+    },
+    "BaseEntity": {
+      "properties": {
+        "entity": {
+          "type": "string",
+          "description": "The name of the entity."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the entity."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Any metadata related to the entity."
+        },
+        "fuzzy_match": {
+          "type": "boolean",
+          "description": "Whether to use fuzzy matching for the entity."
+        }
+      },
+      "example": {
+        "entity": "pizza_topings",
+        "description": "Tasty pizza toppings.",
+        "metadata": {
+          "property": "value"
+        }
+      }
+    },
+    "BaseExample": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the user input example."
+        }
+      }
+    },
+    "BaseIntent": {
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "The name of the intent."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the intent."
+        }
+      }
+    },
+    "BaseMessage": {
+      "properties": {
+        "input": {
+          "description": "The user input from the request.",
+          "$ref": "#/definitions/MessageInput"
+        },
+        "intents": {
+          "description": "An array of intents recognized in the user input, sorted in descending order of confidence",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuntimeIntent"
+          }
+        },
+        "entities": {
+          "description": "An array of entities identified in the user input",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuntimeEntity"
+          }
+        },
+        "alternate_intents": {
+          "type": "boolean",
+          "description": "Whether to return more than one intent. `true` indicates that all matching intents are returned.",
+          "default": false
+        }
+      },
+      "required": [
+        "intents",
+        "entities"
+      ]
+    },
+    "BaseSynonym": {
+      "properties": {
+        "synonym": {
+          "type": "string",
+          "description": "The text of the synonym."
+        }
+      }
+    },
+    "BaseValue": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The text of the entity value."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Any metadata related to the entity value."
+        }
+      }
+    },
+    "BaseWorkspace": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the workspace."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the workspace."
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the workspace."
+        }
+      }
+    },
+    "Context": {
+      "type": "object",
+      "description": "Context information for the message. Include the context from the previous response to maintain state for the conversation.",
+      "required": [
+        "conversation_id",
+        "system"
+      ],
+      "properties": {
+        "conversation_id": {
+          "description": "The unique identifier of the conversation.",
+          "type": "string"
+        },
+        "system": {
+          "title": "SystemResponse",
+          "description": "For internal use only.",
+          "properties": {
+            "SystemResponseObject": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "CounterexampleCollection": {
+      "properties": {
+        "counterexamples": {
+          "description": "An array of objects describing the examples marked as irrelevant input.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Counterexample"
+          }
+        },
+        "pagination": {
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
+        }
+      },
+      "required": [
+        "counterexamples",
+        "pagination"
+      ]
+    },
+    "CreateDialogNode": {
+      "properties": {
+        "dialog_node": {
+          "type": "string",
+          "description": "The dialog node ID."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the dialog node."
+        },
+        "conditions": {
+          "type": "string",
+          "description": "The condition that will trigger the dialog node."
+        },
+        "parent": {
+          "type": "string",
+          "description": "The ID of the parent dialog node (if any)."
+        },
+        "previous_sibling": {
+          "type": "string",
+          "description": "The previous dialog node."
+        },
+        "output": {
+          "type": "object",
+          "description": "The output of the dialog node."
+        },
+        "context": {
+          "type": "object",
+          "description": "The context for the dialog node."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata for the dialog node."
+        },
+        "next_step": {
+          "$ref": "#/definitions/DialogNodeNextStep"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DialogNodeAction"
+          },
+          "maxItems": 5,
+          "description": "The actions for the dialog node."
+        },
+        "title": {
+          "type": "string",
+          "description": "The alias used to identify the dialog node."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "event_handler",
+            "frame",
+            "slot",
+            "response_condition"
+          ],
+          "description": "How the dialog node is processed."
+        },
+        "event_name": {
+          "type": "string",
+          "enum": [
+            "focus",
+            "input",
+            "filled",
+            "validate",
+            "filled_multiple",
+            "generic",
+            "nomatch",
+            "nomatch_responses_depleted"
+          ],
+          "description": "How an `event_handler` node is processed."
+        },
+        "variable": {
+          "type": "string",
+          "description": "The location in the dialog context where output is stored."
+        }
+      },
+      "required": [
+        "dialog_node"
+      ]
+    },
+    "CounterexampleRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCounterexample"
+        }
+      ]
+    },
+    "Counterexample": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the counterexample."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for creation of the counterexample."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for the last update to the counterexample."
+        }
+      },
+      "required": [
+        "text",
+        "created",
+        "updated"
+      ]
+    },
+    "CreateCounterexample": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of a user input marked as irrelevant input."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "x-java-builder": true
+    },
+    "CreateEntity": {
+      "properties": {
+        "entity": {
+          "type": "string",
+          "description": "The name of the entity."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the entity."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Any metadata related to the value."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateValue"
+          },
+          "description": "An array of entity values.",
+          "x-item-name": "value"
+        },
+        "fuzzy_match": {
+          "type": "boolean",
+          "description": "Whether to use fuzzy matching for the entity."
+        }
+      },
+      "required": [
+        "entity"
+      ],
+      "example": {
+        "entity": "pizza_toppings",
+        "description": "Tasty pizza toppings",
+        "metadata": {
+          "property": "value"
+        }
+      },
+      "x-java-builder": true
+    },
+    "CreateExample": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of a user input example."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "x-java-builder": true
+    },
+    "CreateIntent": {
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "The name of the intent."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the intent."
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateExample"
+          },
+          "description": "An array of user input examples.",
+          "x-item-name": "example"
+        }
+      },
+      "required": [
+        "intent"
+      ],
+      "x-java-builder": true
+    },
+    "CreateSynonym": {
+      "properties": {
+        "synonym": {
+          "type": "string",
+          "description": "The text of the synonym."
+        }
+      },
+      "required": [
+        "synonym"
+      ],
+      "x-java-builder": true
+    },
+    "CreateValue": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The text of the entity value."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Any metadata related to the entity value."
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of synonyms for the entity value.",
+          "x-item-name": "synonym"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "x-java-builder": true
+    },
+    "CreateWorkspace": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceRequest"
+        }
+      ],
+      "x-java-builder": true
+    },
+    "DialogNodeAction": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the action."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "client",
+            "server"
+          ],
+          "default": "client",
+          "description": "The type of action to invoke."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "A map of key/value pairs to be provided to the action."
+        },
+        "result_variable": {
+          "type": "string",
+          "description": "The location in the dialog context where the result of the action is stored."
+        }
+      },
+      "required": [
+        "name",
+        "result_variable"
+      ]
+    },
+    "DialogNodeCollection": {
+      "properties": {
+        "dialog_nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DialogNode"
+          }
+        },
+        "pagination": {
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
+        }
+      },
+      "required": [
+        "dialog_nodes",
+        "pagination"
+      ]
+    },
+    "DialogNodeNextStep": {
+      "properties": {
+        "behavior": {
+          "type": "string",
+          "enum": [
+            "jump_to"
+          ],
+          "description": "How the `next_step` reference is processed."
+        },
+        "dialog_node": {
+          "type": "string",
+          "description": "The ID of the dialog node to process next."
+        },
+        "selector": {
+          "type": "string",
+          "enum": [
+            "condition",
+            "client",
+            "user_input",
+            "body"
+          ],
+          "description": "Which part of the dialog node to process next."
+        }
+      },
+      "required": [
+        "behavior"
+      ]
+    },
+    "DialogNode": {
+      "properties": {
+        "dialog_node": {
+          "type": "string",
+          "description": "The dialog node ID."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the dialog node."
+        },
+        "conditions": {
+          "type": "string",
+          "description": "The condition that triggers the dialog node."
+        },
+        "parent": {
+          "type": "string",
+          "description": "The ID of the parent dialog node."
+        },
+        "previous_sibling": {
+          "type": "string",
+          "description": "The ID of the previous sibling dialog node."
+        },
+        "output": {
+          "type": "object",
+          "description": "The output of the dialog node."
+        },
+        "context": {
+          "type": "object",
+          "description": "The context (if defined) for the dialog node."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata (if any) for the dialog node."
+        },
+        "next_step": {
+          "$ref": "#/definitions/DialogNodeNextStep"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for creation of the dialog node."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for the most recent update to the dialog node."
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DialogNodeAction"
+          },
+          "maxItems": 5,
+          "description": "The actions for the dialog node."
+        },
+        "title": {
+          "type": "string",
+          "description": "The alias used to identify the dialog node."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "event_handler",
+            "frame",
+            "slot",
+            "response_condition"
+          ],
+          "description": "How the dialog node is processed."
+        },
+        "event_name": {
+          "type": "string",
+          "enum": [
+            "focus",
+            "input",
+            "filled",
+            "validate",
+            "filled_multiple",
+            "generic",
+            "nomatch",
+            "nomatch_responses_depleted"
+          ],
+          "description": "How an `event_handler` node is processed."
+        },
+        "variable": {
+          "type": "string",
+          "description": "The location in the dialog context where output is stored."
+        }
+      },
+      "required": [
+        "created",
+        "dialog_node",
+        "description",
+        "conditions",
+        "parent",
+        "previous_sibling",
+        "output",
+        "context",
+        "metadata",
+        "next_step",
+        "title"
+      ]
+    },
+    "EntityCollection": {
+      "description": "An array of entities.",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityExport"
+          },
+          "description": "An array of entities."
+        },
+        "pagination": {
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
+        }
+      },
+      "required": [
+        "entities",
+        "pagination"
+      ]
+    },
+    "EntityExport": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "properties": {
+            "values": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ValueExport"
+              },
+              "description": "An array of entity values."
+            }
+          }
+        }
+      ]
+    },
+    "EntityRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseEntity"
+        },
+        {
+          "properties": {
+            "values": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateValue"
+              },
+              "description": "An array of entity values.",
+              "x-item-name": "value"
+            }
+          }
+        }
+      ]
+    },
+    "Entity": {
+      "properties": {
+        "entity": {
+          "type": "string",
+          "description": "The name of the entity."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for creation of the entity."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for the last update to the entity."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the entity."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Any metadata related to the entity."
+        },
+        "fuzzy_match": {
+          "type": "boolean",
+          "description": "Whether fuzzy matching is used for the entity."
+        }
+      },
+      "required": [
+        "entity",
+        "created",
+        "updated"
+      ]
+    },
+    "ErrorDetail": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Description of a specific constraint violation."
+        },
+        "path": {
+          "type": "string",
+          "description": "The location of the constraint violation."
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
+    "ErrorResponse": {
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "General description of an error."
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "Collection of specific constraint violations associated with the error."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ExampleCollection": {
+      "properties": {
+        "examples": {
+          "type": "array",
+          "description": "An array of Example objects describing the examples defined for the intent.",
+          "items": {
+            "$ref": "#/definitions/Example"
+          }
+        },
+        "pagination": {
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
+        }
+      },
+      "required": [
+        "examples",
+        "pagination"
+      ]
+    },
+    "ExampleRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExample"
+        }
+      ]
+    },
+    "Example": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the example."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for creation of the example."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for the last update to the example."
+        }
+      },
+      "required": [
+        "text",
+        "created",
+        "updated"
+      ]
+    },
+    "InputData": {
+      "type": "object",
+      "description": "An object defining the user input.",
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the user input."
+        }
+      },
+      "x-java-builder": true
+    },
+    "IntentCollection": {
+      "properties": {
+        "intents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntentExport"
+          },
+          "description": "An array of intents."
+        },
+        "pagination": {
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
+        }
+      },
+      "required": [
+        "intents",
+        "pagination"
+      ]
+    },
+    "IntentExport": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Intent"
+        },
+        {
+          "properties": {
+            "examples": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Example"
+              },
+              "description": "An array of user input examples.",
+              "x-item-name": "example"
+            }
+          }
+        }
+      ]
+    },
+    "IntentRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseIntent"
+        },
+        {
+          "properties": {
+            "examples": {
+              "type": "array",
+              "description": "An array of user input examples for the intent.",
+              "items": {
+                "$ref": "#/definitions/CreateExample"
+              },
+              "x-item-name": "example"
+            }
+          }
+        }
+      ]
+    },
+    "Intent": {
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "The name of the intent."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for creation of the intent."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for the last update to the intent."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the intent."
+        }
+      },
+      "required": [
+        "intent",
+        "created",
+        "updated"
+      ]
+    },
+    "LogCollection": {
+      "properties": {
+        "logs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogExport"
+          },
+          "description": "An array of log events."
+        },
+        "pagination": {
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/LogPagination"
+        }
+      },
+      "required": [
+        "logs",
+        "pagination"
+      ]
+    },
+    "LogExport": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Log"
+        }
+      ]
+    },
+    "LogMessage": {
+      "type": "object",
+      "description": "Log message details.",
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "The severity of the message.",
+          "enum": [
+            "info",
+            "error",
+            "warn"
+          ]
+        },
+        "msg": {
+          "type": "string",
+          "description": "The text of the message."
+        }
+      },
+      "required": [
+        "level",
+        "msg"
+      ],
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "Log": {
+      "allOf": [
+        {
+          "properties": {
+            "request": {
+              "description": "A request formatted for the Conversation service.",
+              "$ref": "#/definitions/MessageRequest"
+            },
+            "response": {
+              "description": "A response from the Conversation service.",
+              "$ref": "#/definitions/MessageResponse"
+            },
+            "log_id": {
+              "type": "string",
+              "description": "A unique identifier for the logged message."
+            },
+            "request_timestamp": {
+              "type": "string",
+              "description": "The timestamp for receipt of the message."
+            },
+            "response_timestamp": {
+              "type": "string",
+              "description": "The timestamp for the system response to the message."
+            }
+          },
+          "required": [
+            "request",
+            "response",
+            "log_id",
+            "request_timestamp",
+            "response_timestamp"
+          ]
+        }
+      ]
+    },
+    "LogPagination": {
+      "description": "The pagination data for the returned objects.",
+      "properties": {
+        "next_url": {
+          "type": "string",
+          "description": "The URL that will return the next page of results."
+        },
+        "matched": {
+          "type": "integer",
+          "description": "Reserved for future use."
+        }
+      }
+    },
+    "MessageInput": {
+      "description": "An input object that includes the input text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The user's input."
+        }
+      }
+    },
+    "MessageRequest": {
+      "type": "object",
+      "description": "A request formatted for the Conversation service.",
+      "properties": {
+        "input": {
+          "description": "An input object that includes the input text.",
+          "$ref": "#/definitions/InputData"
+        },
+        "alternate_intents": {
+          "type": "boolean",
+          "description": "Whether to return more than one intent. Set to `true` to return all matching intents.",
+          "default": false
+        },
+        "context": {
+          "description": "State information for the conversation. Continue a conversation by including the context object from the previous response.",
+          "$ref": "#/definitions/Context"
+        },
+        "entities": {
+          "type": "array",
+          "description": "Include the entities from the previous response when they do not need to change and to prevent Watson from trying to identify them.",
+          "items": {
+            "$ref": "#/definitions/RuntimeEntity"
+          },
+          "x-item-name": "entity"
+        },
+        "intents": {
+          "type": "array",
+          "description": "An array of name-confidence pairs for the user input. Include the intents from the previous response when they do not need to change and to prevent Watson from trying to identify them.",
+          "items": {
+            "$ref": "#/definitions/RuntimeIntent"
+          },
+          "x-item-name": "intent"
+        },
+        "output": {
+          "description": "System output. Include the output from the request when you have several requests within the same Dialog turn to pass back in the intermediate information.",
+          "$ref": "#/definitions/OutputData"
+        }
+      },
+      "example": {
+        "input": {
+          "text": "Turn on the lights"
+        },
+        "alternate_intents": true
+      }
+    },
+    "MessageResponse": {
+      "description": "A response from the Conversation service.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMessage"
+        },
+        {
+          "properties": {
+            "context": {
+              "description": "State information for the conversation",
+              "$ref": "#/definitions/Context"
+            },
+            "output": {
+              "description": "Output from the dialog, including the response to the user, the nodes that were triggered, and log messages",
+              "$ref": "#/definitions/OutputData"
+            }
+          },
+          "required": [
+            "context",
+            "output"
+          ],
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      ]
+    },
+    "OutputData": {
+      "type": "object",
+      "description": "An output object that includes the response to the user, the nodes that were hit, and messages from the log.",
+      "required": [
+        "log_messages",
+        "text"
+      ],
+      "properties": {
+        "log_messages": {
+          "type": "array",
+          "description": "Up to 50 messages logged with the request.",
+          "items": {
+            "$ref": "#/definitions/LogMessage"
+          }
+        },
+        "text": {
+          "type": "array",
+          "description": "An array of responses to the user.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nodes_visited": {
+          "type": "array",
+          "description": "An array of the nodes that were triggered to create the response.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "Pagination": {
+      "description": "The pagination data for the returned objects.",
+      "properties": {
+        "refresh_url": {
+          "type": "string",
+          "description": "The URL that will return the same page of results."
+        },
+        "next_url": {
+          "type": "string",
+          "description": "The URL that will return the next page of results."
+        },
+        "total": {
+          "type": "integer",
+          "description": "Reserved for future use."
+        },
+        "matched": {
+          "type": "integer",
+          "description": "Reserved for future use."
+        }
+      },
+      "required": [
+        "refresh_url"
+      ]
+    },
+    "RuntimeEntity": {
+      "description": "A term from the request that was identified as an entity.",
+      "type": "object",
+      "required": [
+        "entity",
+        "location",
+        "value"
+      ],
+      "properties": {
+        "entity": {
+          "type": "string",
+          "description": "The recognized entity from a term in the input."
+        },
+        "location": {
+          "type": "array",
+          "description": "Zero-based character offsets that indicate where the entity value begins and ends in the input text.",
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 2,
+          "minItems": 2
+        },
+        "value": {
+          "type": "string",
+          "description": "The term in the input text that was recognized."
+        },
+        "confidence": {
+          "type": "number",
+          "description": "A decimal percentage that represents Watson's confidence in the entity."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata for the entity."
+        }
+      },
+      "example": {
+        "entity": "appliance",
+        "location": [
+          12,
+          18
+        ],
+        "value": "light",
+        "metadata": {}
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "RuntimeIntent": {
+      "type": "object",
+      "description": "An intent identified in the user input.",
+      "required": [
+        "intent",
+        "confidence"
+      ],
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "The name of the recognized intent."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double",
+          "description": "A decimal percentage that represents Watson's confidence in the intent."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "SynonymCollection": {
+      "properties": {
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Synonym"
+          },
+          "description": "An array of synonyms."
+        },
+        "pagination": {
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
+        }
+      },
+      "required": [
+        "synonyms",
+        "pagination"
+      ]
+    },
+    "SynonymRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseSynonym"
+        }
+      ]
+    },
+    "Synonym": {
+      "properties": {
+        "synonym": {
+          "type": "string",
+          "description": "The text of the synonym."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for creation of the synonym."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for the most recent update to the synonym."
+        }
+      },
+      "required": [
+        "synonym",
+        "created",
+        "updated"
+      ]
+    },
+    "UpdateDialogNode": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseDialogNode"
+        },
+        {
+          "properties": {
+            "actions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DialogNodeAction"
+              },
+              "maxItems": 5,
+              "description": "The actions for the dialog node."
+            }
+          }
+        }
+      ]
+    },
+    "UpdateCounterexample": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CounterexampleRequest"
+        }
+      ]
+    },
+    "UpdateEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityRequest"
+        }
+      ]
+    },
+    "UpdateExample": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExampleRequest"
+        }
+      ]
+    },
+    "UpdateIntent": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntentRequest"
+        }
+      ]
+    },
+    "UpdateSynonym": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SynonymRequest"
+        }
+      ]
+    },
+    "UpdateValue": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueRequest"
+        }
+      ]
+    },
+    "UpdateWorkspace": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceRequest"
+        }
+      ]
+    },
+    "ValueCollection": {
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValueExport"
+          },
+          "description": "An array of entity values."
+        },
+        "pagination": {
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
+        }
+      },
+      "required": [
+        "values",
+        "pagination"
+      ]
+    },
+    "ValueExport": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Value"
+        },
+        {
+          "properties": {
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "An array of synonyms."
+            }
+          }
+        }
+      ]
+    },
+    "ValueRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseValue"
+        },
+        {
+          "properties": {
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "An array of synonyms for the entity value.",
+              "x-item-name": "synonym"
+            }
+          }
+        }
+      ]
+    },
+    "Value": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The text of the entity value."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Any metadata related to the entity value."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for creation of the entity value."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for the last update to the entity value."
+        }
+      },
+      "required": [
+        "value",
+        "created",
+        "updated"
+      ]
+    },
+    "WorkspaceCollection": {
+      "properties": {
+        "workspaces": {
+          "type": "array",
+          "description": "An array of workspaces.",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        },
+        "pagination": {
+          "description": "An object defining the pagination data for the returned objects.",
+          "$ref": "#/definitions/Pagination"
+        }
+      },
+      "required": [
+        "workspaces",
+        "pagination"
+      ]
+    },
+    "WorkspaceRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseWorkspace"
+        },
+        {
+          "properties": {
+            "intents": {
+              "type": "array",
+              "description": "An array of objects defining the intents for the workspace.",
+              "items": {
+                "$ref": "#/definitions/CreateIntent"
+              },
+              "x-item-name": "intent"
+            },
+            "entities": {
+              "type": "array",
+              "description": "An array of objects defining the entities for the workspace.",
+              "items": {
+                "$ref": "#/definitions/CreateEntity"
+              },
+              "x-item-name": "entity"
+            },
+            "dialog_nodes": {
+              "type": "array",
+              "description": "An array of objects defining the nodes in the workspace dialog.",
+              "items": {
+                "$ref": "#/definitions/DialogNode"
+              },
+              "x-item-name": "dialog_node"
+            },
+            "counterexamples": {
+              "type": "array",
+              "description": "An array of objects defining input examples that have been marked as irrelevant input.",
+              "items": {
+                "$ref": "#/definitions/CreateCounterexample"
+              },
+              "x-item-name": "counterexample"
+            },
+            "metadata": {
+              "type": "object",
+              "description": "Any metadata related to the workspace."
+            },
+            "learning_opt_out": {
+              "type": "boolean",
+              "default": false,
+              "description": "Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used."
+            }
+          }
+        }
+      ]
+    },
+    "Workspace": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the workspace."
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the workspace."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for creation of the workspace."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for the last update to the workspace."
+        },
+        "workspace_id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The workspace ID."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the workspace."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Any metadata that is required by the workspace."
+        },
+        "learning_opt_out": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used."
+        }
+      },
+      "required": [
+        "name",
+        "language",
+        "created",
+        "updated",
+        "workspace_id"
+      ]
+    },
+    "WorkspaceStatus": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the workspace."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the workspace."
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the workspace."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Any metadata that is required by the workspace."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for creation of the workspace."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The timestamp for the last update to the workspace."
+        },
+        "workspace_id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The workspace ID."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the workspace.",
+          "enum": [
+            "Non Existent",
+            "Training",
+            "Failed",
+            "Available",
+            "Unavailable"
+          ]
+        },
+        "learning_opt_out": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used."
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "language",
+        "metadata",
+        "created",
+        "updated",
+        "workspace_id",
+        "status",
+        "learning_opt_out"
+      ]
+    },
+    "WorkspaceExport": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceStatus"
+        },
+        {
+          "properties": {
+            "intents": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IntentExport"
+              },
+              "description": "An array of intents.",
+              "x-item-name": "intent"
+            },
+            "entities": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityExport"
+              },
+              "description": "An array of entities.",
+              "x-item-name": "entity"
+            },
+            "counterexamples": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Counterexample"
+              },
+              "description": "An array of counterexamples."
+            },
+            "dialog_nodes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DialogNode"
+              },
+              "description": "An array of objects describing the dialog nodes in the workspace."
+            }
+          }
+        }
+      ]
+    }
+  }
+}
